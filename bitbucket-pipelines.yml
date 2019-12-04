@@ -27,5 +27,5 @@ pipelines:
           - pipe: atlassian/heroku-deploy:0.1.1
             variables:
               HEROKU_API_KEY: '7c438dba-9978-4e1f-a965-fb71443289f5'
-              HEROKU_APP_NAME: 'quiz-blue'
+              HEROKU_APP_NAME: 'quiz-blue-luxoft'
               ZIP_FILE: "application.tgz"

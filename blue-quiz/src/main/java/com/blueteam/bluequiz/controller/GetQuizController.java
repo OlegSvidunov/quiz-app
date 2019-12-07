@@ -1,13 +1,14 @@
 package com.blueteam.bluequiz.controller;
 
 
+import com.blueteam.bluequiz.entities.Question;
 import com.blueteam.bluequiz.entities.Quiz;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import static com.blueteam.bluequiz.controller.Api.BASE;
 import static com.blueteam.bluequiz.controller.Api.QUIZ;
@@ -25,13 +26,19 @@ public class GetQuizController {
             quiz = Quiz.builder()
                     .quizId(1)
                     .quizTitle("quiz1")
-                    .questionsList(Arrays.asList(1, 2, 3))
+                    .questions(Collections.singletonList(Question.builder()
+                            .questionId(1)
+                            .questionTitle("title1")
+                            .build()))
                     .build();
         } else {
             quiz = Quiz.builder()
                     .quizId(2)
                     .quizTitle("quiz2")
-                    .questionsList(Arrays.asList(4, 5, 6))
+                    .questions(Collections.singletonList(Question.builder()
+                            .questionId(2)
+                            .questionTitle("title2")
+                            .build()))
                     .build();
         }
 

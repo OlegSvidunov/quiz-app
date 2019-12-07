@@ -1,17 +1,15 @@
 package com.blueteam.bluequiz.entities;
 
-
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
-@Data
+@Getter
 @Builder
 public class Quiz {
-    private int quizId;
+    private final int quizId;
     private String quizTitle;
-    private List<Integer> questionsList = new ArrayList<>();
+    private final List<Question> questions;
+
 }

@@ -1,16 +1,12 @@
 package com.blueteam.bluequiz.entities;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
-@Data
+@Getter
 @Builder
 public class Answer {
-    private int answerId;
-    private String answerTitle;
-    private Map<Integer, Boolean> correctAnswersMap = new HashMap<>();
+    private final int answerId;
+    private final String answerTitle;
+    private final boolean isCorrect;
 }

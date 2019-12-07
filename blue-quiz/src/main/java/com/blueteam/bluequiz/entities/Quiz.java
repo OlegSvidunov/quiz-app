@@ -11,5 +11,4 @@ public class Quiz {
     private final int quizId;
     private String quizTitle;
     private final List<Question> questions;
-
 }

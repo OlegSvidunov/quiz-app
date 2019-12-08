@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Welcome from './components/Welcome';
+import Welcome from './Welcome';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 

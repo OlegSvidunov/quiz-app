@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 
-import static com.blueteam.bluequiz.controller.Api.BASE;
-import static com.blueteam.bluequiz.controller.Api.QUIZ;
+import static com.blueteam.bluequiz.controller.Api.BASE_URL_TEMPLATE;
+import static com.blueteam.bluequiz.controller.Api.QUIZ_URL_TEMPLATE;
 
 
 @RestController
-@RequestMapping(BASE)
-public class GetQuizController {
+@RequestMapping(BASE_URL_TEMPLATE)
+public class QuizController {
 
-    @GetMapping(QUIZ)
+    @GetMapping(QUIZ_URL_TEMPLATE)
     public Quiz getQuizById(@PathVariable int quizId, @PathVariable String email) {
         Quiz quiz;
 

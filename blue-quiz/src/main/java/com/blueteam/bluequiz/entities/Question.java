@@ -8,9 +8,7 @@ import java.util.List;
 @Getter
 @Builder
 public class Question {
-
     private final int questionId;
     private final String questionTitle;
     private final List<Answer> questionAnswers;
-
 }

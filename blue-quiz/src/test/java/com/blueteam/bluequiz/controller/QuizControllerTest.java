@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static com.jayway.restassured.RestAssured.given;
 
 
-class GetQuizControllerTest extends ApplicationTests {
+class QuizControllerTest extends ApplicationTests {
 
 
     @Test
@@ -19,7 +19,7 @@ class GetQuizControllerTest extends ApplicationTests {
                 .contentType(ContentType.JSON)
                 .when()
                 .pathParameters("quizId", 1, "email", "test@test.com")
-                .get(Api.BASE + Api.QUIZ)
+                .get(Api.BASE_URL_TEMPLATE + Api.QUIZ_URL_TEMPLATE)
                 .prettyPeek()
                 .then()
                 .statusCode(HttpStatus.SC_OK)
@@ -33,7 +33,7 @@ class GetQuizControllerTest extends ApplicationTests {
                 .contentType(ContentType.JSON)
                 .when()
                 .pathParameters("quizId", 2, "email", "test@test.com")
-                .get(Api.BASE + Api.QUIZ)
+                .get(Api.BASE_URL_TEMPLATE + Api.QUIZ_URL_TEMPLATE)
                 .prettyPeek()
                 .then()
                 .statusCode(HttpStatus.SC_OK)

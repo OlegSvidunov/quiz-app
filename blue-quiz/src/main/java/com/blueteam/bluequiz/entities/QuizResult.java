@@ -12,6 +12,7 @@ public class QuizResult {
     private final Integer quizId;
     private final String quizName;
     private final Double result;
+    private final String userEmail;
     private LocalDateTime finishedTime;
 
 }

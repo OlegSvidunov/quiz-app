@@ -1,17 +1,22 @@
-# Getting Started
+#### Blue team quiz-platform application
 
-### Reference Documentation
-For further reference, please consider the following sections:
+Last app version deployed here: [https://quiz-blue-luxoft.herokuapp.com][app link]
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.2.1.RELEASE/maven-plugin/)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.2.1.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.2.1.RELEASE/reference/htmlsingle/#using-boot-devtools)
+Build and run on local machine(requires git and maven installation): <br />
+`$ mkdir quiz-blue` <br />
+`$ cd quiz-blue` <br />
+`$ git clone https://oleg_svidunov@bitbucket.org/lux_blue/quiz-blue.git` <br />
+`$ mvn spring-boot:run`
 
-### Guides
-The following guides illustrate how to use some features concretely:
+Default port is 8080, make sure it isn't busy by another processes.
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
+First installation and build may take few minutes, due to local node and npm bootstrap. Consecutive builds are faster. <br />
 
+Options:
+1. Deploy to localhost with clearing work directory: <br />
+`$ mvn clean spring-boot:run` <br />
+2. Fast deploy, skipping React tasks: <br />
+`$ mvn clean spring-boot:run -P dev` <br />
+
+
+[app link]: https://quiz-blue-luxoft.herokuapp.com

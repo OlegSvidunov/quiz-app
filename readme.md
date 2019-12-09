@@ -2,21 +2,20 @@
 
 Last app version deployed here: [https://quiz-blue-luxoft.herokuapp.com][app link]
 
-Build and run on local machine(requires git and maven installation): <br />
-`$ mkdir quiz-blue` <br />
-`$ cd quiz-blue` <br />
-`$ git clone https://oleg_svidunov@bitbucket.org/lux_blue/quiz-blue.git` <br />
+Build and run on local machine(requires git and maven installation):
+`$ mkdir quiz-blue`
+`$ cd quiz-blue`
+`$ git clone https://oleg_svidunov@bitbucket.org/lux_blue/quiz-blue.git`
 `$ mvn spring-boot:run`
 
 Default port is 8080, make sure it isn't busy by another processes.
-
-First installation and build may take few minutes, due to local node and npm bootstrap. Consecutive builds are faster. <br />
+First installation and build may take few minutes, due to local node and npm bootstrap. Consecutive builds are faster. 
 
 Options:
-1. Deploy to localhost with clearing work directory: <br />
-`$ mvn clean spring-boot:run` <br />
-2. Fast deploy, skipping React tasks: <br />
-`$ mvn clean spring-boot:run -P dev` <br />
+1. Deploy to localhost with clearing work directory:
+`$ mvn clean spring-boot:run`
+2. Activate 'dev' profile(skips React tasks - much faster build):
+`$ mvn clean spring-boot:run -P dev`
 
 
 [app link]: https://quiz-blue-luxoft.herokuapp.com 

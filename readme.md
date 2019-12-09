@@ -1,18 +1,19 @@
-#### Blue team quiz-platform application
+# Blue team quiz-platform application
 
-Last stable app version deployed here: [https://quiz-blue-luxoft.herokuapp.com][app link]
+### Last stable app version deployed here: [https://quiz-blue-luxoft.herokuapp.com][app link]
 
-Build and run on local machine(requires git and maven installation):
+#### Build and run on local machine(requires git and maven installation):
 * `$ mkdir quiz-blue`  
 * `$ cd quiz-blue`  
 * `$ git clone https://username@bitbucket.org/lux_blue/quiz-blue.git`  
 * `$ mvn spring-boot:run`
 
-Default port is 8080, make sure it isn't busy by another processes.
-First installation and build may take few minutes, due to local node and npm bootstrap. Consecutive builds are faster. 
+#### Deploy to localhost with clearing work directory:     
+* `$ mvn clean spring-boot:run`   
+#### Activate 'dev' profile(skips React tasks - much faster build):  
+* `$ mvn clean spring-boot:run -P dev` 
 
-* `$ mvn clean spring-boot:run` - Deploy to localhost with clearing work directory:   
-* `$ mvn clean spring-boot:run -P dev` - Activate 'dev' profile(skips React tasks - much faster build): 
+Default port is 8080, make sure it isn't busy by another processes.  First installation and build may take few minutes, due to local node and npm bootstrap. Consecutive builds are faster. 
 
 
 [app link]: https://quiz-blue-luxoft.herokuapp.com 

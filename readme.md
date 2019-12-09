@@ -7,7 +7,7 @@
 * `$ cd quiz-blue`  
 * `$ mvn spring-boot:run`
 
-#### Option 1: deplot with clearing work directory:     
+#### Option 1: deploy with clearing work directory:     
 * `$ mvn clean spring-boot:run`   
 #### Option 2: deploy wiht 'dev' profile(skip static files generation - much more faster):  
 * `$ mvn clean spring-boot:run -P dev` 

@@ -2,6 +2,7 @@ package com.blueteam.bluequiz.controller;
 
 
 import com.blueteam.bluequiz.entities.QuizResult;
+import com.blueteam.bluequiz.persistence.StatisticRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,11 @@ import static com.blueteam.bluequiz.controller.Api.STATISTIC_URL_TEMPLATE;
 @RestController
 @RequestMapping(BASE_URL_TEMPLATE)
 public class StatisticController {
+    final StatisticRepository repository;
+
+    public StatisticController(StatisticRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping(STATISTIC_URL_TEMPLATE)
     public List<QuizResult> getStatistic() {
@@ -46,5 +52,9 @@ public class StatisticController {
                         .finishedTime(LocalDateTime.now())
                         .build()
         );
+    }
+
+    public List<QuizResult> findAll() {
+        return repository.findAll();
     }
 }

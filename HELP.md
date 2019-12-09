@@ -19,4 +19,4 @@ Options:
 `$ mvn clean spring-boot:run -P dev` <br />
 
 
-[app link]: https://quiz-blue-luxoft.herokuapp.com
+[app link]: https://quiz-blue-luxoft.herokuapp.com 

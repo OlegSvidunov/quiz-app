@@ -22,36 +22,6 @@ public class StatisticController {
         this.service = service;
     }
 
-//    @GetMapping(STATISTIC_URL_TEMPLATE)
-//    public List<QuizResult> getStatistic() {
-//
-//        return Arrays.asList(QuizResult.builder()
-//                        .id(1)
-//                        .quizId(1)
-//                        .quizName("quiz_name_1")
-//                        .userEmail("test@test.com")
-//                        .result(70.0)
-//                        .finishedTime(LocalDateTime.now())
-//                        .build(),
-//                QuizResult.builder()
-//                        .id(2)
-//                        .quizId(2)
-//                        .quizName("quiz_name_2")
-//                        .userEmail("com@test.com")
-//                        .result(50.0)
-//                        .finishedTime(LocalDateTime.now())
-//                        .build(),
-//                QuizResult.builder()
-//                        .id(3)
-//                        .quizId(3)
-//                        .quizName("quiz_name_3")
-//                        .userEmail("example@test.com")
-//                        .result(53.0)
-//                        .finishedTime(LocalDateTime.now())
-//                        .build()
-//        );
-//    }
-
     @GetMapping(STATISTIC_URL_TEMPLATE)
     public List<QuizResult> getQuizResultList() {
         return service.findAll();

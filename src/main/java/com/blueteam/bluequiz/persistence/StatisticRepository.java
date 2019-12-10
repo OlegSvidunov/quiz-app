@@ -8,10 +8,5 @@ import java.util.List;
 
 @Repository
 public interface StatisticRepository extends MongoRepository<QuizResult, Integer> {
-
     List<QuizResult> findByUserEmail(String userEmail);
-
-//    public List<QuizResult> findAll(){
-//        return mongoTemplate.findAll(QuizResult.class);
-//    }
 }

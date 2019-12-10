@@ -1,19 +1,11 @@
-import React, { Component } from 'react';
-import Welcome from './Welcome';
-import 'bootstrap/dist/css/bootstrap.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
-class App extends Component {
-
+import React from 'react'
+class App extends React.Component {
     render() {
         return (
-
-                <Router>
-                    <Route exact path="/" component={Welcome} />
-                </Router>
-
-        );
+            <div>
+                <h1>Home</h1>
+            </div>
+        )
     }
 }
-
 export default App

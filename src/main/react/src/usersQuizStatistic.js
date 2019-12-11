@@ -29,10 +29,10 @@ class UsersQuizStatistic extends React.Component {
 
     }
 
-    //2019-12-11T12:23:44.996 -> 2019-12-11 12:23:44
+    //2019-12-11T12:23:44.996 -> 11.12.2019 12:23:44
     reformatDate(dateFromApi) {
         const date = new Date(dateFromApi);
-        return date.toLocaleDateString();
+        return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
     }
 
     renderTableData() {
@@ -46,7 +46,7 @@ class UsersQuizStatistic extends React.Component {
                     <td>{quizId}</td>
                     <td>{quizName}</td>
                     <td>{result}</td>
-                    <td>{finishedTime}</td>
+                    <td>{this.reformatDate(finishedTime)}</td>
                 </tr>
             )
         })

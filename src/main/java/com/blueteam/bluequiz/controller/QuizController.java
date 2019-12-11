@@ -3,7 +3,6 @@ package com.blueteam.bluequiz.controller;
 
 import com.blueteam.bluequiz.entities.Question;
 import com.blueteam.bluequiz.entities.Quiz;
-import lombok.extern.log4j.Log4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +13,7 @@ import java.util.Collections;
 import static com.blueteam.bluequiz.controller.Api.BASE_URL_TEMPLATE;
 import static com.blueteam.bluequiz.controller.Api.QUIZ_URL_TEMPLATE;
 
-@Log4j
+
 @RestController
 @RequestMapping(BASE_URL_TEMPLATE)
 public class QuizController {

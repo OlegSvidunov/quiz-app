@@ -17,7 +17,7 @@ class UsersQuizStatistic extends React.Component {
     componentDidMount() {
         const currentHostName = getCurrentHostName();
         const statisticApiURL = currentHostName + this.state.statisticApiPath;
-        console.log('Fetching data from resource: ' + statisticApiURL)
+        console.log('Fetching data from resource: ' + statisticApiURL);
 
         fetch(statisticApiURL)
             .then(response => response.json())
@@ -32,7 +32,7 @@ class UsersQuizStatistic extends React.Component {
     //2019-12-11T12:23:44.996 -> 11.12.2019 12:23:44
     reformatDate(dateFromApi) {
         const date = new Date(dateFromApi);
-        return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
     }
 
     renderTableData() {

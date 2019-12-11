@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Component
-public class RedirectToIndexFilter implements Filter {
+public class ForwardToReactMainPageFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request,

@@ -15,6 +15,7 @@
 `db.quizResult.findOne()`
 #### About securing MongoDB:
 `https://kb.objectrocket.com/mongo-db/mongodb-create-database-username-password-to-secure-data-467`
+`https://stackoverflow.com/questions/4881208/how-to-secure-mongodb-with-username-and-password`
 #### Useful:
 * `https://www.json.org/json-ru.html`
 * `https://o7planning.org/ru/11773/spring-boot-and-mongodb-tutorial`

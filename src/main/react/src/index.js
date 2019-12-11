@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Welcome from './welcome'
-import Notfound from './notfound'
+import NotFound from './notFound'
 import UsersQuizStatistic from "./usersQuizStatistic";
 const routing = (
     <Router>
@@ -21,9 +21,9 @@ const routing = (
                 <Route path="/admin/statistic" component={UsersQuizStatistic} />
                 {/* Add your component to router here*/}
 
-                <Route component = {Notfound} />
+                <Route component = {NotFound} />
             </Switch>
         </div>
     </Router>
-)
+);
 ReactDOM.render(routing, document.getElementById('root'))

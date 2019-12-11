@@ -1,3 +1,7 @@
 import React from 'react'
-const Notfound = () => <h1>Not found</h1>
+const Notfound = () =>
+    <div
+        id='notFoundError' className="h2 text-center">404 NOT FOUND
+    </div>
+
 export default Notfound

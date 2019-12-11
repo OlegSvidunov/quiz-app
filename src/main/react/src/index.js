@@ -1,28 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
-import App from './App'
-import Users from './users'
-import Contact from './contact'
+import Welcome from './welcome'
 import Notfound from './notfound'
+import UsersQuizStatistic from "./usersQuizStatistic";
 const routing = (
     <Router>
         <div>
             <ul>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/">Welcome</Link>
                 </li>
                 <li>
-                    <Link to="/users">Users</Link>
-                </li>
-                <li>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/admin/statistic">Statistic</Link>
                 </li>
             </ul>
             <Switch>
-                <Route exact path="/" component={App} />
-                <Route path="/users" component={Users} />
-                <Route path="/contact" component={Contact} />
+                <Route exact path="/" component={Welcome} />
+
+                <Route path="/admin/statistic" component={UsersQuizStatistic} />
+                {/* Add your component to router here*/}
+
                 <Route component = {Notfound} />
             </Switch>
         </div>

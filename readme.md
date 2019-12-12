@@ -9,7 +9,7 @@
 
 #### Option 1: deploy with clearing work directory:     
 * `$ mvn clean spring-boot:run`   
-#### Option 2: deploy wiht 'dev' profile(skip static files generation - much more faster):  
+#### Option 2: deploy with 'dev' profile(skip static files generation - much more faster):  
 * `$ mvn clean spring-boot:run -P dev` 
 
 Default port is 8080, make sure it isn't busy by another processes.  First installation and build may take few minutes, due to local node and npm bootstrap. Consecutive builds are faster. 

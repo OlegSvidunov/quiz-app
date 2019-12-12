@@ -1,6 +1,8 @@
 package com.blueteam.bluequiz.service;
 
 import com.blueteam.bluequiz.entities.QuizResult;
+import com.blueteam.bluequiz.entities.UserAnswer;
+import com.blueteam.bluequiz.persistence.QuizRepository;
 import com.blueteam.bluequiz.persistence.StatisticRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +13,6 @@ import java.util.List;
 
 @Service
 public class QuizResultService {
-    final StatisticRepository repository;
-
-    public QuizResultService(StatisticRepository repository) {
-        this.repository = repository;
-    }
-
     private static List<QuizResult> quizResultList = Arrays.asList(QuizResult.builder()
                     .id(1)
                     .quizId(1)
@@ -42,13 +38,25 @@ public class QuizResultService {
                     .finishedTime(LocalDateTime.now())
                     .build()
     );
+    private final StatisticRepository statisticRepository;
+    private final QuizRepository quizRepository;
+
+    public QuizResultService(StatisticRepository statisticRepository, QuizRepository quizRepository) {
+        this.statisticRepository = statisticRepository;
+        this.quizRepository = quizRepository;
+    }
+
+    public Double getQuizResults(Integer quizId, String email, UserAnswer userAnswer) {
+        Double result = 50.5;
+        return result;
+    }
 
     @PostConstruct
-    public void init(){
-        repository.saveAll(quizResultList);
+    public void init() {
+        statisticRepository.saveAll(quizResultList);
     }
 
     public List<QuizResult> findAll() {
-        return repository.findAll();
+        return statisticRepository.findAll();
     }
 }

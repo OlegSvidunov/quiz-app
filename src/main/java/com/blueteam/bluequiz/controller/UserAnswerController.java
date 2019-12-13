@@ -2,8 +2,9 @@ package com.blueteam.bluequiz.controller;
 
 
 import com.blueteam.bluequiz.entities.QuizResult;
-import com.blueteam.bluequiz.entities.UserAnswer;
-import com.blueteam.bluequiz.service.QuizResultService;
+import com.blueteam.bluequiz.entities.UserAnswersContainer;
+import com.blueteam.bluequiz.service.QuizService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -14,20 +15,18 @@ import static com.blueteam.bluequiz.controller.Api.QUIZ_URL_TEMPLATE;
 
 @RestController
 @RequestMapping(BASE_URL_TEMPLATE)
+@RequiredArgsConstructor
 public class UserAnswerController {
 
-    private final QuizResultService quizResultService;
+    private final QuizService quizService;
 
-    public UserAnswerController(QuizResultService quizResultService) {
-        this.quizResultService = quizResultService;
-    }
 
     @PostMapping(QUIZ_URL_TEMPLATE)
     public QuizResult addAnswer(@PathVariable Integer quizId,
                                 @PathVariable String email,
-                                @RequestBody UserAnswer userAnswer) {
+                                @RequestBody UserAnswersContainer userAnswersContainer) {
 
-        Double result = quizResultService.getQuizResults(quizId, email, userAnswer);
+        Double result = quizService.getCalculatedScore(quizId, userAnswersContainer);
 
         return QuizResult.builder()
                 .quizId(quizId)

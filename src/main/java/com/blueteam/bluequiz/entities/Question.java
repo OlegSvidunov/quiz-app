@@ -15,4 +15,13 @@ public class Question {
     private final int questionId;
     private final String questionTitle;
     private final List<Answer> questionAnswers;
+
+
+    public Answer getCorrectAnswer() {
+        return questionAnswers.stream()
+                .filter(Answer::isCorrect)
+                .findFirst()
+                .orElseThrow(IllegalStateException::new);
+
+    }
 }

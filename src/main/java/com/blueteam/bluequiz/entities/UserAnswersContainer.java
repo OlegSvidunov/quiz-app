@@ -11,6 +11,6 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserAnswer {
+public class UserAnswersContainer {
     private Map<Integer, Integer> questionAnswer;
 }

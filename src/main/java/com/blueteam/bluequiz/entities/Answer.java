@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Answer {
     @Id
-    private final int answerId;
+    private final Integer answerId;
     private final String answerTitle;
     private final boolean isCorrect;
 }

@@ -1,7 +1,6 @@
 package com.blueteam.bluequiz.service;
 
 import com.blueteam.bluequiz.entities.QuizResult;
-import com.blueteam.bluequiz.entities.UserAnswer;
 import com.blueteam.bluequiz.persistence.QuizRepository;
 import com.blueteam.bluequiz.persistence.StatisticRepository;
 import org.springframework.stereotype.Service;
@@ -44,11 +43,6 @@ public class QuizResultService {
     public QuizResultService(StatisticRepository statisticRepository, QuizRepository quizRepository) {
         this.statisticRepository = statisticRepository;
         this.quizRepository = quizRepository;
-    }
-
-    public Double getQuizResults(Integer quizId, String email, UserAnswer userAnswer) {
-        Double result = 50.5;
-        return result;
     }
 
     @PostConstruct

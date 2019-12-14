@@ -19,7 +19,7 @@ public class AppConfig {
         config.setAllowCredentials(true);
         config.setAllowedOrigins(Collections.singletonList("*"));
         config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE"));
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

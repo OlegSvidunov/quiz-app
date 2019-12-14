@@ -2,6 +2,7 @@ package com.blueteam.bluequiz.controller;
 
 import com.blueteam.bluequiz.entities.Quiz;
 import lombok.extern.log4j.Log4j;
+import org.springframework.context.annotation.Role;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,12 +48,12 @@ public class QuizController {
         service.insert(quiz);
     }
 
-    @PostMapping(value = UPDATE_QUIZ_URL_TEMPLATE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = UPDATE_QUIZ_URL_TEMPLATE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable Integer id, @RequestBody Quiz quiz) {
         service.update(id, quiz);
     }
 
-    @PostMapping(value = DELETE_QUIZ_URL_TEMPLATE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = DELETE_QUIZ_URL_TEMPLATE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void delete(@PathVariable Integer id) {
         service.deleteById(id);
     }

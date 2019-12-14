@@ -30,7 +30,7 @@ public class QuizController {
         this.service = service;
     }
 
-    @GetMapping(value = SUBMIT_QUIZ_ANSWER, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = QUIZ_URL_TEMPLATE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Quiz getById(@PathVariable Integer id) {
         return service
                 .findById(id)

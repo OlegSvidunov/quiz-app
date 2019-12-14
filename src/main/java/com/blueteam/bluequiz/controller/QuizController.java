@@ -2,7 +2,6 @@ package com.blueteam.bluequiz.controller;
 
 import com.blueteam.bluequiz.entities.Quiz;
 import lombok.extern.log4j.Log4j;
-import org.springframework.context.annotation.Role;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +30,7 @@ public class QuizController {
         this.service = service;
     }
 
-    @GetMapping(value = GET_QUIZ_BY_ID_URL_TEMPLATE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = SUBMIT_QUIZ_ANSWER, produces = MediaType.APPLICATION_JSON_VALUE)
     public Quiz getById(@PathVariable Integer id) {
         return service
                 .findById(id)

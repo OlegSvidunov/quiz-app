@@ -31,7 +31,7 @@ public class QuizController {
     }
 
     @GetMapping(value = QUIZ_URL_TEMPLATE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Quiz getById(@PathVariable Integer id) {
+    public Quiz getById(@PathVariable String id) {
         return quizManagerService
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
@@ -48,12 +48,12 @@ public class QuizController {
     }
 
     @PutMapping(value = UPDATE_QUIZ_URL_TEMPLATE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable Integer id, @RequestBody Quiz quiz) {
+    public void update(@PathVariable String id, @RequestBody Quiz quiz) {
         quizManagerService.update(id, quiz);
     }
 
     @DeleteMapping(value = DELETE_QUIZ_URL_TEMPLATE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void delete(@PathVariable Integer id) {
+    public void delete(@PathVariable String id) {
         quizManagerService.deleteById(id);
     }
 }

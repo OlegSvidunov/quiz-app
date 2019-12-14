@@ -23,37 +23,37 @@ import static com.blueteam.bluequiz.controller.Api.*;
 @RequestMapping(BASE_URL_TEMPLATE)
 public class QuizController {
 
-    private final QuizManagerService service;
+    private final QuizManagerService quizManagerService;
 
     @Autowired
-    public QuizController(QuizManagerService service) {
-        this.service = service;
+    public QuizController(QuizManagerService quizManagerService) {
+        this.quizManagerService = quizManagerService;
     }
 
     @GetMapping(value = QUIZ_URL_TEMPLATE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Quiz getById(@PathVariable Integer id) {
-        return service
+        return quizManagerService
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
     }
 
     @GetMapping(value = LIST_ALL_QUIZZES_URL_TEMPLATE, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Quiz> getListOfAllQuizzes() {
-        return service.getListOfAllQuizzes();
+        return quizManagerService.getListOfAllQuizzes();
     }
 
     @PostMapping(value = ADD_QUIZ_URL_TEMPLATE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void add(@RequestBody Quiz quiz) {
-        service.insert(quiz);
+        quizManagerService.insert(quiz);
     }
 
     @PutMapping(value = UPDATE_QUIZ_URL_TEMPLATE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable Integer id, @RequestBody Quiz quiz) {
-        service.update(id, quiz);
+        quizManagerService.update(id, quiz);
     }
 
     @DeleteMapping(value = DELETE_QUIZ_URL_TEMPLATE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void delete(@PathVariable Integer id) {
-        service.deleteById(id);
+        quizManagerService.deleteById(id);
     }
 }

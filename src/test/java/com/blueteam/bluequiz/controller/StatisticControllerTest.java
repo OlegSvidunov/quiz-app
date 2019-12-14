@@ -18,7 +18,7 @@ class StatisticControllerTest extends ApplicationTests {
         given()
                 .contentType(ContentType.JSON)
                 .when()
-                .get(Api.BASE_URL_TEMPLATE + Api.USER_STATISTIC_URL_TEMPLATE)
+                .get(Api.BASE_URL_TEMPLATE + Api.ADMIN_STATISTIC_URL_TEMPLATE)
                 .prettyPeek()
                 .then()
                 .statusCode(HttpStatus.SC_OK)

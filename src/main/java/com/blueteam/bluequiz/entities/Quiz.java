@@ -12,7 +12,7 @@ import java.util.List;
 @Document
 public class Quiz {
     @Id
-    private final int quizId;
+    private String _id;
     private String quizTitle;
     private final List<Question> questions;
 }

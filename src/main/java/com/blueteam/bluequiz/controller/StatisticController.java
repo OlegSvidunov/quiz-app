@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.blueteam.bluequiz.controller.Api.BASE_URL_TEMPLATE;
-import static com.blueteam.bluequiz.controller.Api.STATISTIC_URL_TEMPLATE;
+import static com.blueteam.bluequiz.controller.Api.*;
 
 
 @RestController
@@ -22,7 +21,7 @@ public class StatisticController {
         this.service = service;
     }
 
-    @GetMapping(STATISTIC_URL_TEMPLATE)
+    @GetMapping(ADMIN_STATISTIC_URL_TEMPLATE)
     public List<QuizResult> getQuizResultList() {
         return service.findAll();
     }

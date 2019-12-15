@@ -52,6 +52,27 @@ export class Model {
                                     "correct": true
                                 }
                             ]
+                        },
+                        {
+                            "questionId": 3,
+                            "questionTitle": "Что такое пончик?",
+                            "questionAnswers": [
+                                {
+                                    "answerId": 1,
+                                    "answerTitle": "пирожок",
+                                    "correct": true
+                                },
+                                {
+                                    "answerId": 2,
+                                    "answerTitle": "Средство от забывчивости",
+                                    "correct": false
+                                },
+                                {
+                                    "answerId": 3,
+                                    "answerTitle": "Пончик - это как пончо, только с другим окончанием",
+                                    "correct": false
+                                }
+                            ]
                         }
                     ]
                 },

@@ -6,7 +6,7 @@ class UsersQuizStatistic extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            statisticApiPath: '/api/statistic',
+            statisticApiPath: '/api/administration/quiz/statistic',
             apiData: [],
             wasFetched: true,
             error: null

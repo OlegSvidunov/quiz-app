@@ -5,6 +5,8 @@ import Welcome from './welcome'
 import NotFound from './notFound'
 import UsersQuizStatistic from "./usersQuizStatistic";
 import QuizCreator from "./components/quiz-manager/quizViewer";
+import QuestionEditor from "./components/quiz-manager/questionEditor";
+
 const routing = (
     <Router>
         <div>
@@ -24,6 +26,7 @@ const routing = (
 
                 <Route path="/admin/statistic" component={UsersQuizStatistic} />
                 <Route path="/admin/create-quiz" component={QuizCreator} />
+                <Route path="/admin/edit-question" component={QuestionEditor} />
                 {/* Add your component to router here*/}
 
                 <Route component = {NotFound} />

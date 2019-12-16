@@ -1,0 +1,27 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react'
+
+class QuestionEditor extends React.Component {
+    constructor(props) {
+        super(props);
+
+
+    }
+
+    render() {
+        return <div className="container">
+            <div>Question editing</div>
+        </div>
+    }
+
+    deleteQuestion = (question) => () => {
+        console.log('deleting element' + question)
+        let index = this.state.questions.indexOf(question);
+        this.setState({
+            questions: this.state.questions.filter((_, i) => i !== index)
+        });
+    }
+}
+
+
+export default QuestionEditor

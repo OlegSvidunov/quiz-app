@@ -16,12 +16,12 @@ export class Model {
                                     "correct": true
                                 },
                                 {
-                                    "answerId": 5,
+                                    "answerId": 2,
                                     "answerTitle": "Человек",
                                     "correct": false
                                 },
                                 {
-                                    "answerId": 6,
+                                    "answerId": 3,
                                     "answerTitle": "Тот самый с пяти гривневой купюры",
                                     "correct": false
                                 }

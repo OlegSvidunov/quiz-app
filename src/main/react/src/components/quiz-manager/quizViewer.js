@@ -28,15 +28,12 @@ class QuizViewer extends React.Component {
             </div>
             <ul className="list-group">
                 {this.state.questions.map(question => {
-                    return <li key={question.questionId} className="list-group-item list-group-flush">
+                    return <li key={question.questionId} className="list-group-item list-group-item-light list-group-flush">
                         <div className="h4 d-flex justify-content-sm-between">
                             {question.questionTitle}
                             <div className="d-flex justify-content-end">
-                                <div className="btn btn-outline-primary mr-2"
-                                     onClick={this.openEditForm(question)}>Edit
-                                </div>
-                                <div className="btn btn-outline-danger" onClick={this.deleteQuestion(question)}>Delete
-                                </div>
+                                <div className="btn btn-outline-primary mr-2" onClick={this.openEditForm(question)}>Edit</div>
+                                <div className="btn btn-outline-danger" onClick={this.deleteQuestion(question)}>Delete</div>
                             </div>
                         </div>
                         {this.Answers(question.questionAnswers)}

@@ -20,6 +20,9 @@ const routing = (
                 <li>
                     <Link to="/admin/create-quiz">Create-quiz</Link>
                 </li>
+                <li>
+                    <Link to="/admin/edit-question">Edit question</Link>
+                </li>
             </ul>
             <Switch>
                 <Route exact path="/" component={Welcome} />

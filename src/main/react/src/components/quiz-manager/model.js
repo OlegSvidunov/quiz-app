@@ -13,17 +13,17 @@ export class Model {
                                 {
                                     "answerId": 1,
                                     "answerTitle": "Тринадцатый пророк созвездия сейлормун",
-                                    "correct": true
+                                    "isCorrect": true
                                 },
                                 {
                                     "answerId": 2,
                                     "answerTitle": "Человек",
-                                    "correct": false
+                                    "isCorrect": false
                                 },
                                 {
                                     "answerId": 3,
                                     "answerTitle": "Тот самый с пяти гривневой купюры",
-                                    "correct": false
+                                    "isCorrect": false
                                 }
                             ]
                         },
@@ -34,22 +34,22 @@ export class Model {
                                 {
                                     "answerId": 1,
                                     "answerTitle": "1318",
-                                    "correct": true
+                                    "isCorrect": true
                                 },
                                 {
                                     "answerId": 2,
                                     "answerTitle": "Не момню",
-                                    "correct": false
+                                    "isCorrect": false
                                 },
                                 {
                                     "answerId": 3,
                                     "answerTitle": "Я баптист",
-                                    "correct": false
+                                    "isCorrect": false
                                 },
                                 {
                                     "answerId": 4,
                                     "answerTitle": "Ни одни ответ не является правильным",
-                                    "correct": true
+                                    "isCorrect": true
                                 }
                             ]
                         },
@@ -60,17 +60,17 @@ export class Model {
                                 {
                                     "answerId": 1,
                                     "answerTitle": "пирожок",
-                                    "correct": true
+                                    "isCorrect": true
                                 },
                                 {
                                     "answerId": 2,
                                     "answerTitle": "Средство от забывчивости",
-                                    "correct": false
+                                    "isCorrect": false
                                 },
                                 {
                                     "answerId": 3,
                                     "answerTitle": "Пончик - это как пончо, только с другим окончанием",
-                                    "correct": false
+                                    "isCorrect": false
                                 }
                             ]
                         }
@@ -87,17 +87,17 @@ export class Model {
                                 {
                                     "answerId": 1,
                                     "answerTitle": "Я",
-                                    "correct": true
+                                    "isCorrect": true
                                 },
                                 {
                                     "answerId": 5,
                                     "answerTitle": "Ты",
-                                    "correct": false
+                                    "isCorrect": false
                                 },
                                 {
                                     "answerId": 6,
                                     "answerTitle": "Тот самый с пяти гривневой купюры",
-                                    "correct": false
+                                    "isCorrect": false
                                 }
                             ]
                         },
@@ -108,22 +108,22 @@ export class Model {
                                 {
                                     "answerId": 1,
                                     "answerTitle": "Потому что",
-                                    "correct": true
+                                    "isCorrect": true
                                 },
                                 {
                                     "answerId": 2,
                                     "answerTitle": "Не задавай глупых вопросов",
-                                    "correct": false
+                                    "isCorrect": false
                                 },
                                 {
                                     "answerId": 3,
                                     "answerTitle": "Я баптист",
-                                    "correct": false
+                                    "isCorrect": false
                                 },
                                 {
                                     "answerId": 4,
                                     "answerTitle": "Ни одни ответ не является правильным",
-                                    "correct": true
+                                    "isCorrect": true
                                 }
                             ]
                         }

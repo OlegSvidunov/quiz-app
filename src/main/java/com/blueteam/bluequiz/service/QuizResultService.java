@@ -18,7 +18,6 @@ public class QuizResultService {
     }
 
     private static List<QuizResult> quizResultList = Arrays.asList(QuizResult.builder()
-                    .id(1)
                     .quizId(1)
                     .quizName("quiz_name_1")
                     .userEmail("test@test.com")
@@ -26,7 +25,6 @@ public class QuizResultService {
                     .finishedTime(LocalDateTime.now())
                     .build(),
             QuizResult.builder()
-                    .id(2)
                     .quizId(2)
                     .quizName("quiz_name_2")
                     .userEmail("com@test.com")
@@ -34,7 +32,6 @@ public class QuizResultService {
                     .finishedTime(LocalDateTime.now())
                     .build(),
             QuizResult.builder()
-                    .id(3)
                     .quizId(3)
                     .quizName("quiz_name_3")
                     .userEmail("example@test.com")

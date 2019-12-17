@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Document
 public class QuizResult {
     @Id
-    private final Integer id;
+    private String _id;
     private final Integer quizId;
     private final String quizName;
     private final Double result;

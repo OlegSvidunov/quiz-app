@@ -22,25 +22,28 @@ class QuestionEditor extends React.Component {
                 <div className="input-group-prepend">
                     <span className="input-group-text" id="inputGroup-sizing-lg">Question: </span>
                 </div>
-                <input type="text" className="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"
-                       defaultValue={this.state.questionTitle} onChange={(e)=> this.setQuestionTitle(e.target.value)}/>
+                <input type="text" className="form-control"
+                       defaultValue={this.state.questionTitle}
+                       onChange={(e) => this.setQuestionTitle(e.target.value)}/>
             </div>
 
             {this.state.answers.map(answer => {
                 return <div key={answer.answerId}>
                     <div className="input-group mb-3">
                         <div className="input-group-append">
-                            <span className="input-group-text" id="basic-addon2">Answer: </span>
+                            <span className="input-group-text">Answer: </span>
                         </div>
-                        <input type="text" className="form-control" aria-label="Text input with checkbox"
-                               defaultValue={answer.answerTitle} onChange={(e)=> this.setAnswerTitle(answer, e.target.value)}/>
+                        <input type="text" className="form-control"
+                               defaultValue={answer.answerTitle}
+                               onChange={(e) => this.setAnswerTitle(answer, e.target.value)}/>
 
                         <div className="input-group-append">
-                            <span className="input-group-text" id="basic-addon2">Correct:</span>
+                            <span className="input-group-text">Correct:</span>
                         </div>
                         <div className="input-group-prepend">
                             <div className="input-group-text">
-                                <input type="checkbox" onChange={(e)=> this.setIsCorrectStatus(answer, e.target.checked)} aria-label="Checkbox for following text input"/>
+                                <input type="checkbox"
+                                       onChange={(e) => this.setIsCorrectStatus(answer, e.target.checked)}/>
                             </div>
                         </div>
                         {

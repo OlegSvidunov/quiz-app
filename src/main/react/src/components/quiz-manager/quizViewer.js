@@ -1,5 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react'
+import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react"
 import {Model} from "./model";
 import QuestionEditor from "./questionEditor";
 import generateUUID from "../../util/generateUUID";
@@ -26,14 +26,17 @@ class QuizViewer extends React.Component {
         }
 
         return <div className="container">
-            <div className="text-center h3 pb-2b"> Edit quiz: {this.state.quizUnmodifiedTitle}</div>
+            <div className="text-center">
+                <div className="text-secondary h2 d-inline"> Edit quiz: </div>
+                <div className="h2 d-inline"> <u> {this.state.quizUnmodifiedTitle}</u></div>
+            </div>
                 {/*<div className="btn btn-primary">Back to list of quizzes</div>*/}
 
             <div className="input-group input-group-lg mt-4 mb-2">
                 <div className="input-group-prepend">
-                    <span className="input-group-text" id="inputGroup-sizing-lg">Title: </span>
+                    <span className="input-group-text">Title: </span>
                 </div>
-                <input type="text" className="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"
+                <input type="text" className="form-control"
                        defaultValue={this.state.quizTitle} onChange={(e)=> this.setQuizTitle(e.target.value)}/>
             </div>
 
@@ -57,7 +60,9 @@ class QuizViewer extends React.Component {
             </ul>
             <div className="d-flex justify-content-between mt-3 mb-5">
                 <div className="btn btn-primary" onClick={this.addNewQuestion}>Add a question</div>
-                <div className="btn btn-primary" onClick={this.doServerQuizUpdateRequest}>Save quiz</div>
+                <div className="btn btn-primary" onClick={this.state.quizId === undefined
+                    ? this.doServerQuizInsertRequest
+                    : this.doServerQuizUpdateRequest }>Save quiz</div>
             </div>
         </div>
     }
@@ -100,12 +105,12 @@ class QuizViewer extends React.Component {
     };
 
     updateQuestion = (question) => {
-        console.log('update quiz', question);
+        console.log("update quiz", question);
         this.closeEditForm()
     };
 
     deleteQuestion = (question) => () => {
-        console.log('deleting element' + question);
+        console.log("deleting element" + question);
         let index = this.state.questions.indexOf(question);
         this.setState({
             questions: this.state.questions.filter((_, i) => i !== index)
@@ -142,17 +147,32 @@ class QuizViewer extends React.Component {
         return quiz
     }
 
-    doServerQuizUpdateRequest = () => {
-        console.log(this.state)
-        let currentHostName = getCurrentHostName();
-        let quizUpdateApi = "/api/quiz/" + this.state.quizId;
-        let targetURL = currentHostName + quizUpdateApi;
-        let mocktargetUrl = "http://localhost:8080/api/quiz/" + this.state.quizId
-        console.log("request: PUT " + mocktargetUrl)
-        fetch(mocktargetUrl, {
-            method: 'PUT',
+    doServerQuizInsertRequest = () => {
+        let quizInsertApi = "/api/quiz/add";
+        let targetURL = getCurrentHostName() + quizInsertApi;
+        let mockTargetURL = "http://localhost:8080/api/quiz/add"
+        console.log("request: POST " + mockTargetURL)
+
+        fetch(mockTargetURL, {
+            method: "POST",
             headers: {
-                'Content-type': 'application/json',
+                "Content-type": "application/json",
+            },
+            body: this.getQuizForSendingToServer()})
+            .then(response => response.json())
+            .then((responseJson) => console.log(responseJson))
+            .catch(error => console.log(error));
+    }
+
+    doServerQuizUpdateRequest = () => {
+        let quizUpdateApi = "/api/quiz/" + this.state.quizId;
+        let targetURL = getCurrentHostName() + quizUpdateApi;
+        let mockTargetURL = "http://localhost:8080/api/quiz/5df8ba86b3d3191324456cb8"
+        console.log("request: PUT " + mockTargetURL)
+        fetch(mockTargetURL, {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json",
             },
             body: this.getQuizForSendingToServer()})
             .then(response => response.json())

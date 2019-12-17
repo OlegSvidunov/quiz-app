@@ -55,9 +55,9 @@ class QuestionEditor extends React.Component {
 
                 </div>;
             })}
-            <div className="d-flex justify-content-between mt-3 mb-5">
+            <div className="d-flex justify-content-between mt-3 mb-2">
                 <div className="btn btn-primary" onClick={this.addNewAnswer}>Add answer</div>
-                <div className="btn btn-primary" onClick={() => this.props.callback(this.state)}>Save</div>
+                <div className="btn btn-primary" onClick={() => this.props.callback(this.state)}>Save question</div>
             </div>
         </div>
     }

@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 class QuizViewer extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props)
+        console.log(props);
         this.state = {
             quizTitle: props.location.state.quiz.quizTitle,
             quizId: props.location.state.quiz._id,
@@ -25,48 +25,56 @@ class QuizViewer extends React.Component {
             )
         }
 
-        return <div className="container">
-            <Link to="/admin/">
-                <div className="d-flex justify-content-between">
-                    <div className="btn btn-light ju">Back to list of quizzes</div>
-                </div>
-            </Link>
+        return (
+            <div className="container">
+                <Link to="/admin/">
+                    <div className="d-flex justify-content-between">
+                        <div className="btn btn-light ju">Back to list of quizzes</div>
+                    </div>
+                </Link>
 
-            <div className="input-group input-group-lg mt-4 mb-2">
-                <div className="input-group-prepend">
-                    <span className="input-group-text">Title: </span>
+                <div className="input-group input-group-lg mt-4 mb-2">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text">Title: </span>
+                    </div>
+                    <input type="text" className="form-control"
+                           defaultValue={this.state.quizTitle}
+                           onChange={(e) => this.setQuizTitle(e.target.value)}/>
                 </div>
-                <input type="text" className="form-control"
-                       defaultValue={this.state.quizTitle} onChange={(e)=> this.setQuizTitle(e.target.value)}/>
-            </div>
 
-            <ul className="list-group">
-                {this.state.questions.map(question => {
-                    return <li key={question._id} className="list-group-item list-group-item-light list-group-flush">
-                        <div className="h4 d-flex justify-content-sm-between">
-                            {question.questionTitle}
-                            <div className="d-flex justify-content-end">
-                                <div className="btn btn-outline-primary mr-2" onClick={this.openEditForm(question)}>Edit</div>
-                                {
-                                    Object.keys(this.state.questions).length > 1
-                                        ? <div className="btn btn-outline-danger" onClick={this.deleteQuestion(question)}>Delete</div>
-                                        : false
-                                }
+                <ul className="list-group">
+                    {this.state.questions.map(question => {
+                        return <li key={question._id}
+                                   className="list-group-item list-group-item-light list-group-flush">
+                            <div className="h4 d-flex justify-content-sm-between">
+                                {question.questionTitle}
+                                <div className="d-flex justify-content-end">
+                                    <div className="btn btn-outline-primary mr-2"
+                                         onClick={this.openEditForm(question)}>Edit
+                                    </div>
+                                    {
+                                        Object.keys(this.state.questions).length > 1
+                                            ? <div className="btn btn-outline-danger"
+                                                   onClick={this.deleteQuestion(question)}>Delete</div>
+                                            : false
+                                    }
+                                </div>
                             </div>
+                            {this.Answers(question.questionAnswers)}
+                        </li>
+                    })}
+                </ul>
+                <div className="d-flex justify-content-between mt-3 mb-5">
+                    <div className="btn btn-primary" onClick={this.addNewQuestion}>Add a question</div>
+                    <Link to="/admin">
+                        <div className="btn btn-primary" onClick={this.state.quizId === undefined
+                            ? this.doServerQuizInsertRequest
+                            : this.doServerQuizUpdateRequest}>Save quiz
                         </div>
-                        {this.Answers(question.questionAnswers)}
-                    </li>
-                })}
-            </ul>
-            <Link to="/admin">
-            <div className="d-flex justify-content-between mt-3 mb-5">
-                <div className="btn btn-primary" onClick={this.addNewQuestion}>Add a question</div>
-                <div className="btn btn-primary" onClick={this.state.quizId === undefined
-                    ? this.doServerQuizInsertRequest
-                    : this.doServerQuizUpdateRequest }>Save quiz</div>
+                    </Link>
+                </div>
             </div>
-            </Link>
-        </div>
+        )
     }
 
     Answers(answers) {
@@ -107,7 +115,17 @@ class QuizViewer extends React.Component {
     };
 
     updateQuestion = (question) => {
-        console.log("update quiz", question);
+        console.log("update question: ", question);
+        let list = [...this.state.questions];
+        let index = list.indexOf(question);
+        let curQuestion = list[index];
+        curAnswer.answerTitle = value;
+        list[index] = curAnswer;
+
+        this.setState({
+            answers: list
+        })
+        console.log(this.state.answers)
         this.closeEditForm()
     };
 
@@ -135,7 +153,7 @@ class QuizViewer extends React.Component {
     setQuizTitle(value) {
         this.setState({
             quizTitle: value
-        })
+        });
         console.log(this.state)
     }
 
@@ -144,8 +162,8 @@ class QuizViewer extends React.Component {
             quizId: this.state.quizId,
             quizTitle: this.state.quizTitle,
             questions: this.state.questions
-        })
-        console.log("sending quiz to server: ", quiz)
+        });
+        console.log("sending quiz to server: ", quiz);
         return quiz
     }
 
@@ -153,30 +171,32 @@ class QuizViewer extends React.Component {
         let quizInsertApi = "/api/quiz/add";
         let targetURL = getCurrentHostName() + quizInsertApi;
         // let targetURL = "http://localhost:8080/api/quiz/add"
-        console.log("request: POST " + targetURL)
+        console.log("request: POST " + targetURL);
 
         fetch(targetURL, {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
             },
-            body: this.getQuizForSendingToServer()})
+            body: this.getQuizForSendingToServer()
+        })
             .then(response => response.json())
             .then((responseJson) => console.log(responseJson))
             .catch(error => console.log(error));
-    }
+    };
 
     doServerQuizUpdateRequest = () => {
         let quizUpdateApi = "/api/quiz/";
         let targetURL = getCurrentHostName() + quizUpdateApi + this.state.quizId;
         // let targetURL = "http://localhost:8080/api/quiz/5df8ba86b3d3191324456cb8"
-        console.log("request: PUT " + targetURL)
+        console.log("request: PUT " + targetURL);
         fetch(targetURL, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",
             },
-            body: this.getQuizForSendingToServer()})
+            body: this.getQuizForSendingToServer()
+        })
             .then(response => response.json())
             .then((responseJson) => console.log(responseJson))
             .catch(error => console.log(error));

@@ -12,5 +12,6 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAnswersContainer {
-    private Map<Integer, Integer> questionAnswer;
+    private String emailAddress;
+    private Map<String, String> questionAnswer;
 }

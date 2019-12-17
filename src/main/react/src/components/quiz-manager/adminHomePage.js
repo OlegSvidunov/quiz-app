@@ -24,7 +24,7 @@ class AdminHomePage extends React.Component {
             return <div className="h2 text-center">Error on loading data from server</div>
         }
 
-        if (Object.keys(this.state.apiData) < 1) {
+        if (Object.keys(this.state.apiData).length < 1) {
                 return (
                     <div>
                         <div className="h2 text-center mb-3"> Nobody has created a quiz yet :(</div>
@@ -113,11 +113,11 @@ class AdminHomePage extends React.Component {
 
     doServerDeleteQuizRequest = (quiz) => () => {
         console.log(this.state)
-        let quizUpdateApi = "/api/quiz/" + this.state;
-        let targetURL = getCurrentHostName() + quizUpdateApi;
-        let mockTargetURL = "http://localhost:8080/api/quiz/" + quiz._id
-        console.log("request: DELETE " + mockTargetURL)
-        fetch(mockTargetURL, {
+        let quizDeleteApi = "/api/quiz/";
+        let targetURL = getCurrentHostName() + quizDeleteApi + quiz._id.toString();
+        // let targetURL = "http://localhost:8080/api/quiz/" + quiz._id
+        console.log("request: DELETE " + targetURL)
+        fetch(targetURL, {
             method: "DELETE",
             headers: {
                 "Content-type": "application/json",
@@ -125,18 +125,20 @@ class AdminHomePage extends React.Component {
         })
             .then(response => response.json())
             .then((responseJson) => console.log(responseJson))
-            .then(this.getListOfQuizzesFromServer())
+            .then(this.getListOfQuizzesFromServer)
             .catch(error => console.log(error));
+
+        document.location.reload()
 
     }
 
     getListOfQuizzesFromServer() {
         let allQuizzesList = "/api/quiz/all";
         let targetURL = getCurrentHostName() + allQuizzesList;
-        let mockTargetURL = "http://localhost:8080/api/quiz/all";
-        console.log("request: GET " + mockTargetURL);
+        // let targetUrl = "http://localhost:8080/api/quiz/all";
+        console.log("request: GET " + targetURL);
 
-        fetch(mockTargetURL)
+        fetch(targetURL)
             .then(response => response.json())
             .then(result => this.setState({apiData: result}))
             .catch(e => {

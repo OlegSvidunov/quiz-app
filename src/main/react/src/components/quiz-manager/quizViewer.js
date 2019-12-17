@@ -11,7 +11,6 @@ class QuizViewer extends React.Component {
         console.log(props)
         this.state = {
             quizTitle: props.location.state.quiz.quizTitle,
-            quizUnmodifiedTitle: props.location.state.quiz.quizTitle,
             quizId: props.location.state.quiz._id,
             questions: props.location.state.quiz.questions,
             showEditFrom: false,
@@ -27,10 +26,11 @@ class QuizViewer extends React.Component {
         }
 
         return <div className="container">
-            <div className="text-center">
-                <div className="h2 d-inline"> <u> {this.state.quizUnmodifiedTitle}</u></div>
-            </div>
-                {/*<div className="btn btn-primary">Back to list of quizzes</div>*/}
+            <Link to="/admin/">
+                <div className="d-flex justify-content-between">
+                    <div className="btn btn-light ju">Back to list of quizzes</div>
+                </div>
+            </Link>
 
             <div className="input-group input-group-lg mt-4 mb-2">
                 <div className="input-group-prepend">
@@ -58,7 +58,7 @@ class QuizViewer extends React.Component {
                     </li>
                 })}
             </ul>
-            <Link to="/admin/">
+            <Link to="/admin">
             <div className="d-flex justify-content-between mt-3 mb-5">
                 <div className="btn btn-primary" onClick={this.addNewQuestion}>Add a question</div>
                 <div className="btn btn-primary" onClick={this.state.quizId === undefined
@@ -152,10 +152,10 @@ class QuizViewer extends React.Component {
     doServerQuizInsertRequest = () => {
         let quizInsertApi = "/api/quiz/add";
         let targetURL = getCurrentHostName() + quizInsertApi;
-        let mockTargetURL = "http://localhost:8080/api/quiz/add"
-        console.log("request: POST " + mockTargetURL)
+        // let targetURL = "http://localhost:8080/api/quiz/add"
+        console.log("request: POST " + targetURL)
 
-        fetch(mockTargetURL, {
+        fetch(targetURL, {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
@@ -167,11 +167,11 @@ class QuizViewer extends React.Component {
     }
 
     doServerQuizUpdateRequest = () => {
-        let quizUpdateApi = "/api/quiz/" + this.state.quizId;
-        let targetURL = getCurrentHostName() + quizUpdateApi;
-        let mockTargetURL = "http://localhost:8080/api/quiz/5df8ba86b3d3191324456cb8"
-        console.log("request: PUT " + mockTargetURL)
-        fetch(mockTargetURL, {
+        let quizUpdateApi = "/api/quiz/";
+        let targetURL = getCurrentHostName() + quizUpdateApi + this.state.quizId;
+        // let targetURL = "http://localhost:8080/api/quiz/5df8ba86b3d3191324456cb8"
+        console.log("request: PUT " + targetURL)
+        fetch(targetURL, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",

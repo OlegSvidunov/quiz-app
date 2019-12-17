@@ -11,7 +11,16 @@ import java.util.List;
 @Builder
 @Document
 public class Question {
-    private final String _id = new ObjectId().toString();
+
+    private String _id;
     private final String questionTitle;
     private final List<Answer> questionAnswers;
+
+    public Question(String _id, String questionTitle, List<Answer> questionAnswers) {
+        this._id = _id == null
+                ? new ObjectId().toString()
+                : _id;
+        this.questionTitle = questionTitle;
+        this.questionAnswers = questionAnswers;
+    }
 }

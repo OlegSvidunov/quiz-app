@@ -1,18 +1,19 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react"
-import {Model} from "./model";
 import QuestionEditor from "./questionEditor";
 import generateUUID from "../../util/generateUUID";
 import getCurrentHostName from "../../util/getCurrentHostName";
+import {Link} from "react-router-dom";
 
 class QuizViewer extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props)
         this.state = {
-            quizTitle: new Model().getModel()[0].quizTitle,
-            quizUnmodifiedTitle: new Model().getModel()[0].quizTitle,
-            quizId: new Model().getModel()[0].quizId,
-            questions: new Model().getModel()[0].questions,
+            quizTitle: props.location.state.quiz.quizTitle,
+            quizUnmodifiedTitle: props.location.state.quiz.quizTitle,
+            quizId: props.location.state.quiz._id,
+            questions: props.location.state.quiz.questions,
             showEditFrom: false,
             currentQuestion: null,
         }
@@ -27,7 +28,6 @@ class QuizViewer extends React.Component {
 
         return <div className="container">
             <div className="text-center">
-                <div className="text-secondary h2 d-inline"> Edit quiz: </div>
                 <div className="h2 d-inline"> <u> {this.state.quizUnmodifiedTitle}</u></div>
             </div>
                 {/*<div className="btn btn-primary">Back to list of quizzes</div>*/}
@@ -42,7 +42,7 @@ class QuizViewer extends React.Component {
 
             <ul className="list-group">
                 {this.state.questions.map(question => {
-                    return <li key={question.questionId} className="list-group-item list-group-item-light list-group-flush">
+                    return <li key={question._id} className="list-group-item list-group-item-light list-group-flush">
                         <div className="h4 d-flex justify-content-sm-between">
                             {question.questionTitle}
                             <div className="d-flex justify-content-end">
@@ -58,19 +58,21 @@ class QuizViewer extends React.Component {
                     </li>
                 })}
             </ul>
+            <Link to="/admin/">
             <div className="d-flex justify-content-between mt-3 mb-5">
                 <div className="btn btn-primary" onClick={this.addNewQuestion}>Add a question</div>
                 <div className="btn btn-primary" onClick={this.state.quizId === undefined
                     ? this.doServerQuizInsertRequest
                     : this.doServerQuizUpdateRequest }>Save quiz</div>
             </div>
+            </Link>
         </div>
     }
 
     Answers(answers) {
         return <ul className="list-group">
             {answers.map(answer => {
-                return <li key={answer.answerId} className="list-group-item list-group-flush">
+                return <li key={answer._id} className="list-group-item list-group-flush">
                     {<input className="mr-2" type="checkBox" checked={!!answer.correct} readOnly/>}
                     {answer.answerTitle}
                 </li>
@@ -180,6 +182,5 @@ class QuizViewer extends React.Component {
             .catch(error => console.log(error));
     }
 }
-
 
 export default QuizViewer

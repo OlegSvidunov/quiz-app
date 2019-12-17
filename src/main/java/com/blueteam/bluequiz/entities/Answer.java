@@ -9,7 +9,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @Document
 public class Answer {
-    private final String _id = new ObjectId().toString();
+
+    private String _id;
     private final String answerTitle;
     private final boolean isCorrect;
+
+    public Answer(String _id, String answerTitle, boolean isCorrect) {
+        this._id = _id == null
+                ? new ObjectId().toString()
+                : _id;
+        this.answerTitle = answerTitle;
+        this.isCorrect = isCorrect;
+    }
 }

@@ -35,10 +35,9 @@ class AdminHomePage extends React.Component {
 
         return (
             <div className="container">
-                <div className="text-center mb-5">
-                    <div className="h2">Quiz administration page</div>
+                <div className="text-center mb-3">
+                    <div className="h1 mb-5">QUIZ MANAGER</div>
                     {this.getCreateQuizButton()}
-
                 </div>
                 {
                     this.state.apiData.map(quiz => {
@@ -50,6 +49,7 @@ class AdminHomePage extends React.Component {
                                     {quiz.quizTitle}
                                 </a>
                                 <div className="d-flex justify-content-end">
+                                    {console.log("API DATA: ", JSON.stringify(this.state.apiData))}
                                     <Link to={{
                                         pathname: '/admin/quiz-editor',
                                         state: {quiz}
@@ -82,30 +82,22 @@ class AdminHomePage extends React.Component {
         )
     }
 
+    generateNewQuestion() {
+        return {
+            _id: generateUUID(),
+            answerTitle: "New answer",
+            isCorrect: false
+        }
+    }
+
     getNewQuiz() {
         return {
             quizTitle: "New quiz",
             questions: [
                 {
                     _id: generateUUID(),
-                    questionTitle: "some question",
-                    questionAnswers: [
-                        {
-                            _id: generateUUID(),
-                            answerTitle: "some answer",
-                            isCorrect: false
-                        },
-                        {
-                            _id: generateUUID(),
-                            answerTitle: "some answer",
-                            isCorrect: false
-                        },
-                        {
-                            _id: generateUUID(),
-                            answerTitle: "some answer",
-                            isCorrect: false
-                        }
-                    ]
+                    questionTitle: "New answer",
+                    questionAnswers:  [...new Array(3)].map(() => this.generateNewQuestion())
                 }
             ]
         }
@@ -115,7 +107,6 @@ class AdminHomePage extends React.Component {
         console.log(this.state)
         let quizDeleteApi = "/api/quiz/";
         let targetURL = getCurrentHostName() + quizDeleteApi + quiz._id.toString();
-        // let targetURL = "http://localhost:8080/api/quiz/" + quiz._id
         console.log("request: DELETE " + targetURL)
         fetch(targetURL, {
             method: "DELETE",
@@ -135,7 +126,6 @@ class AdminHomePage extends React.Component {
     getListOfQuizzesFromServer() {
         let allQuizzesList = "/api/quiz/all";
         let targetURL = getCurrentHostName() + allQuizzesList;
-        // let targetUrl = "http://localhost:8080/api/quiz/all";
         console.log("request: GET " + targetURL);
 
         fetch(targetURL)

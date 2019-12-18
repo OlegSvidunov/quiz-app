@@ -7,16 +7,17 @@ class QuestionEditor extends React.Component {
         super(props);
         console.log(this.props);
         this.state = {
-            questionId: props.question.questionId,
+            _id: props.question._id,
             questionTitle: props.question.questionTitle,
-            answers: props.question.questionAnswers,
+            questionAnswers: props.question.questionAnswers,
         }
     }
 
 
     render() {
         return <div className="container ">
-            <div className="h2 text-center">Question editing</div>
+            <div className="h1 text-center mb-5">QUESTION EDITOR</div>
+
 
             <div className="input-group input-group-lg mb-5">
                 <div className="input-group-prepend">
@@ -27,7 +28,7 @@ class QuestionEditor extends React.Component {
                        onChange={(e) => this.setQuestionTitle(e.target.value)}/>
             </div>
 
-            {this.state.answers.map(answer => {
+            {this.state.questionAnswers.map(answer => {
                 return <div key={answer.answerId}>
                     <div className="input-group mb-3">
                         <div className="input-group-append">
@@ -42,12 +43,12 @@ class QuestionEditor extends React.Component {
                         </div>
                         <div className="input-group-prepend">
                             <div className="input-group-text">
-                                <input type="checkbox"
+                                <input type="checkbox" checked={answer.isCorrect}
                                        onChange={(e) => this.setIsCorrectStatus(answer, e.target.checked)}/>
                             </div>
                         </div>
                         {
-                            Object.keys(this.state.answers).length > 2
+                            Object.keys(this.state.questionAnswers).length > 2
                                 ?  <div className="btn btn-outline-danger" onClick={this.deleteAnswer(answer)}>Delete</div>
                                 : false
                         }
@@ -64,30 +65,30 @@ class QuestionEditor extends React.Component {
 
     setAnswerTitle = (answer, value) => {
         console.log('text field value: ' + value)
-        let list = [...this.state.answers];
+        let list = [...this.state.questionAnswers];
         let index = list.indexOf(answer);
         let curAnswer = list[index];
         curAnswer.answerTitle = value;
         list[index] = curAnswer;
 
         this.setState({
-            answers: list
+            questionAnswers: list
         })
-        console.log(this.state.answers)
+        console.log(this.state.questionAnswers)
     }
 
     setIsCorrectStatus = (answer, value) => {
         console.log('checkbox value: ' + value)
-        let list = [...this.state.answers];
+        let list = [...this.state.questionAnswers];
         let index = list.indexOf(answer);
         let curAnswer = list[index];
         curAnswer.isCorrect = value;
         list[index] = curAnswer;
 
         this.setState({
-            answers: list
+            questionAnswers: list
         })
-        console.log(this.state.answers)
+        console.log(this.state.questionAnswers)
     }
 
     addNewAnswer = () => {
@@ -99,18 +100,18 @@ class QuestionEditor extends React.Component {
         };
 
         this.setState(state => {
-            const list = [...state.answers, newAnswer];
+            const list = [...state.questionAnswers, newAnswer];
             return {
-                answers: list,
+                questionAnswers: list,
             };
         })
     };
 
     deleteAnswer = (answer) => () => {
         console.log('deleting element' + answer);
-        let index = this.state.answers.indexOf(answer);
+        let index = this.state.questionAnswers.indexOf(answer);
         this.setState({
-            answers: this.state.answers.filter((_, i) => i !== index)
+            questionAnswers: this.state.questionAnswers.filter((_, i) => i !== index)
         });
     };
 

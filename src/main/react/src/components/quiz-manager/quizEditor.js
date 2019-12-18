@@ -5,7 +5,7 @@ import generateUUID from "../../util/generateUUID";
 import getCurrentHostName from "../../util/getCurrentHostName";
 import {Link} from "react-router-dom";
 
-class QuizViewer extends React.Component {
+class QuizEditor extends React.Component {
     constructor(props) {
         super(props);
         console.log(props);
@@ -16,6 +16,13 @@ class QuizViewer extends React.Component {
             showEditFrom: false,
             currentQuestion: null,
         }
+/*        this.state = {
+            quizTitle: new MockQuizModel().getModel()[0].quizTitle,
+            quizId: "123",
+            questions: new MockQuizModel().getModel()[0].questions,
+            showEditFrom: false,
+            currentQuestion: null,
+        }*/
     }
 
     render() {
@@ -27,6 +34,8 @@ class QuizViewer extends React.Component {
 
         return (
             <div className="container">
+                <div className="h1 text-center">QUIZ EDITOR</div>
+
                 <Link to="/admin/">
                     <div className="d-flex justify-content-between">
                         <div className="btn btn-light ju">Back to list of quizzes</div>
@@ -44,6 +53,7 @@ class QuizViewer extends React.Component {
 
                 <ul className="list-group">
                     {this.state.questions.map(question => {
+                        console.log("render question: ", JSON.stringify(question))
                         return <li key={question._id}
                                    className="list-group-item list-group-item-light list-group-flush">
                             <div className="h4 d-flex justify-content-sm-between">
@@ -60,7 +70,7 @@ class QuizViewer extends React.Component {
                                     }
                                 </div>
                             </div>
-                            {this.Answers(question.questionAnswers)}
+                            {this.Answer(question.questionAnswers)}
                         </li>
                     })}
                 </ul>
@@ -77,11 +87,12 @@ class QuizViewer extends React.Component {
         )
     }
 
-    Answers(answers) {
+    Answer(answers) {
         return <ul className="list-group">
             {answers.map(answer => {
                 return <li key={answer._id} className="list-group-item list-group-flush">
-                    {<input className="mr-2" type="checkBox" checked={!!answer.correct} readOnly/>}
+                    {console.log("render answer: ", JSON.stringify(answer))}
+                    {<input className="mr-2" type="checkBox" checked={answer.isCorrect} readOnly/>}
                     {answer.answerTitle}
                 </li>
             })}
@@ -92,7 +103,7 @@ class QuizViewer extends React.Component {
         return {
             answerId: generateUUID(),
             answerTitle: "New answer",
-            correct: false
+            isCorrect: false
         }
     }
 
@@ -117,15 +128,15 @@ class QuizViewer extends React.Component {
     updateQuestion = (question) => {
         console.log("update question: ", question);
         let list = [...this.state.questions];
-        let index = list.indexOf(question);
-        let curQuestion = list[index];
-        curAnswer.answerTitle = value;
-        list[index] = curAnswer;
+        let index = list.indexOf(this.state.currentQuestion);
+        console.log("list of question before update:", JSON.stringify(this.state.questions) )
+        list[index] = question
+        console.log("list of question after update:", JSON.stringify(list) )
 
         this.setState({
-            answers: list
+            questions: list
         })
-        console.log(this.state.answers)
+        console.log("state after quiz update: ", this.state)
         this.closeEditForm()
     };
 
@@ -158,8 +169,15 @@ class QuizViewer extends React.Component {
     }
 
     getQuizForSendingToServer() {
+        let questions = this.state.questions;
+        questions.map((question) => {
+            delete question._id;
+            question.questionAnswers.map((answer) => {
+                delete answer._id;
+            })
+        })
         let quiz = JSON.stringify({
-            quizId: this.state.quizId,
+            _id: this.state.quizId,
             quizTitle: this.state.quizTitle,
             questions: this.state.questions
         });
@@ -170,7 +188,6 @@ class QuizViewer extends React.Component {
     doServerQuizInsertRequest = () => {
         let quizInsertApi = "/api/quiz/add";
         let targetURL = getCurrentHostName() + quizInsertApi;
-        // let targetURL = "http://localhost:8080/api/quiz/add"
         console.log("request: POST " + targetURL);
 
         fetch(targetURL, {
@@ -188,7 +205,6 @@ class QuizViewer extends React.Component {
     doServerQuizUpdateRequest = () => {
         let quizUpdateApi = "/api/quiz/";
         let targetURL = getCurrentHostName() + quizUpdateApi + this.state.quizId;
-        // let targetURL = "http://localhost:8080/api/quiz/5df8ba86b3d3191324456cb8"
         console.log("request: PUT " + targetURL);
         fetch(targetURL, {
             method: "PUT",
@@ -203,4 +219,4 @@ class QuizViewer extends React.Component {
     }
 }
 
-export default QuizViewer
+export default QuizEditor

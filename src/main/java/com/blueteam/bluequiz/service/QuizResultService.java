@@ -1,51 +1,87 @@
 package com.blueteam.bluequiz.service;
 
-import com.blueteam.bluequiz.entities.QuizResult;
+import com.blueteam.bluequiz.entities.*;
+import com.blueteam.bluequiz.persistence.QuizRepository;
+import com.blueteam.bluequiz.persistence.QuizResultRepository;
 import com.blueteam.bluequiz.persistence.StatisticRepository;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class QuizResultService {
-    final StatisticRepository repository;
 
-    public QuizResultService(StatisticRepository repository) {
-        this.repository = repository;
-    }
+    private final QuizRepository quizRepository;
+    private final QuizResultRepository quizResultRepository;
+    private final StatisticRepository statisticRepository;
 
-    private static List<QuizResult> quizResultList = Arrays.asList(QuizResult.builder()
-                    .quizId(1)
-                    .quizName("quiz_name_1")
-                    .userEmail("test@test.com")
-                    .result(70.0)
-                    .finishedTime(LocalDateTime.now())
-                    .build(),
-            QuizResult.builder()
-                    .quizId(2)
-                    .quizName("quiz_name_2")
-                    .userEmail("com@test.com")
-                    .result(50.0)
-                    .finishedTime(LocalDateTime.now())
-                    .build(),
-            QuizResult.builder()
-                    .quizId(3)
-                    .quizName("quiz_name_3")
-                    .userEmail("example@test.com")
-                    .result(53.0)
-                    .finishedTime(LocalDateTime.now())
-                    .build()
-    );
 
-    @PostConstruct
-    public void init(){
-        repository.saveAll(quizResultList);
+    public QuizResultService(QuizResultRepository quizResultRepository,
+                             QuizRepository quizRepository,
+                             StatisticRepository statisticRepository) {
+        this.quizRepository = quizRepository;
+        this.quizResultRepository = quizResultRepository;
+        this.statisticRepository = statisticRepository;
     }
 
     public List<QuizResult> findAll() {
-        return repository.findAll();
+        return statisticRepository.findAll();
+    }
+
+    public Quiz findQuiz(String quizId) {
+        return quizRepository.findById(quizId).orElseThrow(IllegalStateException::new);
+    }
+
+    public Answer getCorrectAnswer(Question question) {
+        return question.getQuestionAnswers().stream()
+                .filter(Answer::isCorrect)
+                .findFirst()
+                .orElseThrow(IllegalStateException::new);
+    }
+
+    public QuizResult checkCorrectAnswers(String quizId, UserAnswersContainer userAnswersContainer) {
+        String emailAddress = userAnswersContainer.getEmailAddress();
+
+        Quiz theQuiz = findQuiz(quizId);
+        List<Question> questions = theQuiz.getQuestions();
+
+        int questionsInQuiz = questions.size();
+        int correctAnswers = 0;
+
+        for (Question question : questions) {
+            String userAnswerId = userAnswersContainer.getQuestionAnswer().get(question.get_id());
+            String correctAnswerIdFromDb = getCorrectAnswer(question).get_id();
+
+            if (Objects.equals(userAnswerId, correctAnswerIdFromDb)) {
+                correctAnswers += 1;
+            }
+        }
+
+        double calculateResults = calculateResults(questionsInQuiz, correctAnswers);
+        return saveQuizResult(theQuiz, calculateResults, emailAddress);
+    }
+
+    private double calculateResults(int questionsInQuizQuantity, int usersCorrectAnswersQuantity) {
+        double result = (double) usersCorrectAnswersQuantity / questionsInQuizQuantity;
+        double roundedResult = BigDecimal.valueOf(result)
+                .setScale(2, RoundingMode.FLOOR).doubleValue();
+
+        return roundedResult * 100;
+    }
+
+    private QuizResult saveQuizResult(Quiz theQuiz, double calculateResults, String emailAddress) {
+        QuizResult quizResult = QuizResult.builder()
+                .quizId(theQuiz.get_id())
+                .quizName(theQuiz.getQuizTitle())
+                .userEmail(emailAddress)
+                .result(calculateResults)
+                .finishedTime(LocalDateTime.now())
+                .build();
+
+        return quizResultRepository.save(quizResult);
     }
 }

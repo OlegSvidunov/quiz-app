@@ -11,7 +11,6 @@ import java.util.List;
 @Builder
 @Document
 public class Question {
-
     private String _id;
     private final String questionTitle;
     private final List<Answer> questionAnswers;

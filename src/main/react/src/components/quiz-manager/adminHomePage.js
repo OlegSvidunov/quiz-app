@@ -45,9 +45,7 @@ class AdminHomePage extends React.Component {
                             <div key={quiz._id}>
                             <li className="list-group-item list-group-item-action">
                                 <div className="d-flex justify-content-sm-between">
-                                <a>
                                     {quiz.quizTitle}
-                                </a>
                                 <div className="d-flex justify-content-end">
                                     {console.log("API DATA: ", JSON.stringify(this.state.apiData))}
                                     <Link to={{

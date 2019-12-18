@@ -3,6 +3,13 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Login Page</title>
+    <style>
+   body {
+    text-align:  center;
+    margin: 25%;
+   }
+
+    </style>
 </head>
 <body>
 <div th:if="${param.error}">
@@ -11,6 +18,7 @@
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
+
 <form th:action="@{/login}" method="post">
     <div><label> Login : <input type="text" name="username"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>

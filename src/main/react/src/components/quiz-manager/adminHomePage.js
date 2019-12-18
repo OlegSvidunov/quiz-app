@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react"
 import getCurrentHostName from "../../util/getCurrentHostName";
 import {Link} from "react-router-dom";
-import generateUUID from "../../util/generateUUID";
+import uuidv1 from "uuid/v1"
 
 class AdminHomePage extends React.Component {
     constructor(props) {
@@ -82,7 +82,7 @@ class AdminHomePage extends React.Component {
 
     generateNewQuestion() {
         return {
-            _id: generateUUID(),
+            _id: uuidv1(),
             answerTitle: "New answer",
             isCorrect: false
         }
@@ -93,7 +93,7 @@ class AdminHomePage extends React.Component {
             quizTitle: "New quiz",
             questions: [
                 {
-                    _id: generateUUID(),
+                    _id: uuidv1(),
                     questionTitle: "New answer",
                     questionAnswers:  [...new Array(3)].map(() => this.generateNewQuestion())
                 }

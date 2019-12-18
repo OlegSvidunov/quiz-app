@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react"
 import QuestionEditor from "./questionEditor";
-import generateUUID from "../../util/generateUUID";
 import getCurrentHostName from "../../util/getCurrentHostName";
 import {Link} from "react-router-dom";
+import uuidv1 from "uuid/v1"
 
 class QuizEditor extends React.Component {
     constructor(props) {
@@ -94,7 +94,7 @@ class QuizEditor extends React.Component {
 
     newAnswer() {
         return {
-            answerId: generateUUID(),
+            answerId: require('uuid/v1'),
             answerTitle: "New answer",
             isCorrect: false
         }
@@ -102,7 +102,7 @@ class QuizEditor extends React.Component {
 
     addNewQuestion = () => {
         let newQuestion = {
-            questionId: generateUUID(),
+            questionId: uuidv1(),
             questionTitle: "New question",
             questionAnswers: [...new Array(3)].map(() => this.newAnswer())
         };
@@ -167,8 +167,10 @@ class QuizEditor extends React.Component {
             delete question._id;
             question.questionAnswers.map((answer) => {
                 delete answer._id;
-            })
-        })
+                return null;
+            });
+            return null;
+        });
         let quiz = JSON.stringify({
             _id: this.state.quizId,
             quizTitle: this.state.quizTitle,

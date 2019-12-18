@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
-import generateUUID from "../../util/generateUUID";
+import uuidv1 from "uuid/v1"
 
 class QuestionEditor extends React.Component {
     constructor(props) {
@@ -92,7 +92,7 @@ class QuestionEditor extends React.Component {
     }
 
     addNewAnswer = () => {
-        let UUID = generateUUID();
+        let UUID = uuidv1();
         let newAnswer = {
             answerId: UUID,
             answerTitle: "New answer",

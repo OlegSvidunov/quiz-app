@@ -16,13 +16,6 @@ class QuizEditor extends React.Component {
             showEditFrom: false,
             currentQuestion: null,
         }
-/*        this.state = {
-            quizTitle: new MockQuizModel().getModel()[0].quizTitle,
-            quizId: "123",
-            questions: new MockQuizModel().getModel()[0].questions,
-            showEditFrom: false,
-            currentQuestion: null,
-        }*/
     }
 
     render() {

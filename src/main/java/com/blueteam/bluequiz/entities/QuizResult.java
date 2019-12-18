@@ -11,12 +11,11 @@ import java.time.LocalDateTime;
 @Builder
 @Document
 public class QuizResult {
+    private final String quizId;
     @Id
-    private final Integer id;
-    private final Integer quizId;
+    private String _id;
     private final String quizName;
     private final Double result;
     private final String userEmail;
     private LocalDateTime finishedTime;
-
 }

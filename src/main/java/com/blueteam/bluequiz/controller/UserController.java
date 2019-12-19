@@ -1,7 +1,11 @@
 package com.blueteam.bluequiz.controller;
 
 import com.blueteam.bluequiz.service.QuizUserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 import static com.blueteam.bluequiz.controller.Api.*;
 
@@ -25,8 +29,10 @@ public class UserController {
         quizUserService.deleteUserById(id);
     }
 
-    @PostMapping(LIST_ALL_QUIZZES_URL_TEMPLATE)
-    public void saveNewUser(@RequestParam String userName, @RequestParam String password) {
-        quizUserService.saveNewUser(userName, password, "USER");
+    @PostMapping(ADD_USER_URL_TEMPLATE)
+    public ResponseEntity saveNewUser(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
+        quizUserService.saveNewUser(username, password, "USER");
+        response.addHeader("Location", "/login");
+        return new ResponseEntity(HttpStatus.MOVED_PERMANENTLY);
     }
 }

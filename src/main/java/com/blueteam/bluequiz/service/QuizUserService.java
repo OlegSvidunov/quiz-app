@@ -39,10 +39,9 @@ public class QuizUserService implements UserDetailsService {
     @PostConstruct
     public void init() {
         try {
-            saveNewUser("user", "user", "USER");
             saveNewUser("admin", "admin", "ADMIN");
         } catch (IllegalStateException e) {
-            //ignore - mock only for test purposes
+            //ignore - temp mock only for test purposes
         }
     }
 

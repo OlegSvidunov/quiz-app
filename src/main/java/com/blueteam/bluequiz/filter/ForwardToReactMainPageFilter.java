@@ -41,6 +41,12 @@ public class ForwardToReactMainPageFilter implements Filter {
             return;
         }
 
+        //handle registration requests by spring
+        if (requestURI.startsWith("/registration")) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         //let react handle any other requests, by forwarding them to index.html
         request.getRequestDispatcher("/").forward(request, response);
     }

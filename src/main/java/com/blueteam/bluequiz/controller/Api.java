@@ -15,6 +15,5 @@ public class Api {
     public static final String ADMIN_STATISTIC_URL_TEMPLATE = "/administration/quiz/statistic";
     public static final String USER_STATISTIC_URL_TEMPLATE = "/quiz/statistic";
     public static final String USER_URL_TEMPLATE = "/user";
-    public static final String LIST_ALL_USERS_URL_TEMPLATE = "/user/all";
-
+    public static final String ADD_USER_URL_TEMPLATE = "/user/add";
 }

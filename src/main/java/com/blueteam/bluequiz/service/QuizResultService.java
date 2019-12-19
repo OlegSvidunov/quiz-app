@@ -4,6 +4,8 @@ import com.blueteam.bluequiz.entities.*;
 import com.blueteam.bluequiz.persistence.QuizRepository;
 import com.blueteam.bluequiz.persistence.QuizResultRepository;
 import com.blueteam.bluequiz.persistence.StatisticRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,14 +20,17 @@ public class QuizResultService {
     private final QuizRepository quizRepository;
     private final QuizResultRepository quizResultRepository;
     private final StatisticRepository statisticRepository;
+    private final QuizUserService userService;
 
 
     public QuizResultService(QuizResultRepository quizResultRepository,
                              QuizRepository quizRepository,
-                             StatisticRepository statisticRepository) {
+                             StatisticRepository statisticRepository,
+                             QuizUserService userService) {
         this.quizRepository = quizRepository;
         this.quizResultRepository = quizResultRepository;
         this.statisticRepository = statisticRepository;
+        this.userService = userService;
     }
 
     public List<QuizResult> findAll() {
@@ -44,7 +49,7 @@ public class QuizResultService {
     }
 
     public QuizResult checkCorrectAnswers(String quizId, UserAnswersContainer userAnswersContainer) {
-        String emailAddress = userAnswersContainer.getEmailAddress();
+        String emailAddress = userService.getCurrentUserName();
 
         Quiz theQuiz = findQuiz(quizId);
         List<Question> questions = theQuiz.getQuestions();

@@ -8,7 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -32,9 +33,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder builder) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         //NoOpPasswordEncoder.getInstance() используется тк я не смог победить "Encoded password does not look like BCrypt"
-        builder.userDetailsService(quizUserService).passwordEncoder(NoOpPasswordEncoder.getInstance());
+        auth.userDetailsService(quizUserService)
+                .passwordEncoder(passwordEncoder);
     }
 }

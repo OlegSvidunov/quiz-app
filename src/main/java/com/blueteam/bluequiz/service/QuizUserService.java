@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -23,13 +24,13 @@ public class QuizUserService implements UserDetailsService {
     private static List<User> quizUserList = Arrays.asList(User.builder()
                     .id(1)
                     .username("admin")
-                    .password("admin")
+                    .password(new BCryptPasswordEncoder().encode("admin"))
                     .roles("ADMIN")
                     .build(),
             User.builder()
                     .id(2)
                     .username("user")
-                    .password("user")
+                    .password(new BCryptPasswordEncoder().encode("user"))
                     .roles("USER")
                     .build()
     );

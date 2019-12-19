@@ -6,6 +6,7 @@ import com.blueteam.bluequiz.entities.Question;
 import com.blueteam.bluequiz.entities.Quiz;
 import com.blueteam.bluequiz.entities.UserAnswersContainer;
 import com.blueteam.bluequiz.persistence.QuizRepository;
+import com.blueteam.bluequiz.persistence.StatisticRepository;
 import com.jayway.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
@@ -23,6 +24,8 @@ import static com.jayway.restassured.RestAssured.given;
 public class UserAnswersControllerTest extends ApplicationTests {
     @Autowired
     QuizRepository quizRepository;
+    @Autowired
+    StatisticRepository statisticRepository;
 
 
     @BeforeEach
@@ -33,6 +36,9 @@ public class UserAnswersControllerTest extends ApplicationTests {
     @AfterEach
     void clearData() {
         quizRepository.deleteById("3");
+        statisticRepository.deleteByUserEmail("test100@test.com");
+        statisticRepository.deleteByUserEmail("test0@test.com");
+        statisticRepository.deleteByUserEmail("test66@test.com");
     }
 
     @Test

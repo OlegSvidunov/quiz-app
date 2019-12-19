@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface StatisticRepository extends MongoRepository<QuizResult, String> {
     List<QuizResult> findByUserEmail(String userEmail);
+
+    void deleteByUserEmail(String userEmail);
 }

@@ -39,6 +39,7 @@ public class QuizManagerService {
             repository.save(Quiz.builder()
                     ._id(id)
                     .quizTitle(quiz.getQuizTitle())
+                    .questions(quiz.getQuestions())
                     .build());
         }
     }

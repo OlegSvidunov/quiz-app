@@ -2,12 +2,16 @@ package com.blueteam.bluequiz.service;
 
 import com.blueteam.bluequiz.entities.Quiz;
 import com.blueteam.bluequiz.persistence.QuizRepository;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Log4j
 @Service
 public class QuizManagerService {
 
@@ -27,24 +31,39 @@ public class QuizManagerService {
     }
 
     public void insert(Quiz quiz) {
-        Quiz newQuiz = Quiz.builder()
-                .quizTitle(quiz.getQuizTitle())
-                .questions(quiz.getQuestions())
-                .build();
-        repository.insert(newQuiz);
+        if (hasRoleAdmin()) {
+            Quiz newQuiz = Quiz.builder()
+                    .quizTitle(quiz.getQuizTitle())
+                    .questions(quiz.getQuestions())
+                    .build();
+            repository.insert(newQuiz);
+        }
     }
 
     public void update(String id, Quiz quiz) {
-        if (repository.existsById(id)) {
-            repository.save(Quiz.builder()
-                    ._id(id)
-                    .quizTitle(quiz.getQuizTitle())
-                    .questions(quiz.getQuestions())
-                    .build());
+        if (hasRoleAdmin()) {
+            if (repository.existsById(id)) {
+                repository.save(Quiz.builder()
+                        ._id(id)
+                        .quizTitle(quiz.getQuizTitle())
+                        .questions(quiz.getQuestions())
+                        .build());
+            }
         }
     }
 
     public void deleteById(String id) {
-        repository.deleteById(id);
+        if (hasRoleAdmin()) {
+            repository.deleteById(id);
+        }
+    }
+
+    private boolean hasRoleAdmin() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.getAuthorities().toArray()[0].toString().equals("ADMIN")) {
+            log.debug("User " + authentication.getName() + " try to call this method without grant ADMIN");
+            return false;
+        }
+        return true;
     }
 }

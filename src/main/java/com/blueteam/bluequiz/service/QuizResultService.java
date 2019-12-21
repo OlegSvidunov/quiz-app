@@ -4,28 +4,34 @@ import com.blueteam.bluequiz.entities.*;
 import com.blueteam.bluequiz.persistence.QuizRepository;
 import com.blueteam.bluequiz.persistence.QuizResultRepository;
 import com.blueteam.bluequiz.persistence.StatisticRepository;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+@Log4j
 @Service
 public class QuizResultService {
 
     private final QuizRepository quizRepository;
     private final QuizResultRepository quizResultRepository;
     private final StatisticRepository statisticRepository;
+    private final QuizUserService userService;
 
 
     public QuizResultService(QuizResultRepository quizResultRepository,
                              QuizRepository quizRepository,
-                             StatisticRepository statisticRepository) {
+                             StatisticRepository statisticRepository,
+                             QuizUserService userService) {
         this.quizRepository = quizRepository;
         this.quizResultRepository = quizResultRepository;
         this.statisticRepository = statisticRepository;
+        this.userService = userService;
     }
 
     public List<QuizResult> findAll() {
@@ -36,15 +42,15 @@ public class QuizResultService {
         return quizRepository.findById(quizId).orElseThrow(IllegalStateException::new);
     }
 
-    public Answer getCorrectAnswer(Question question) {
+    public Set<String> getCorrectAnswers (Question question) {
         return question.getQuestionAnswers().stream()
                 .filter(Answer::isCorrect)
-                .findFirst()
-                .orElseThrow(IllegalStateException::new);
+                .map(Answer::get_id)
+                .collect(Collectors.toSet());
     }
 
     public QuizResult checkCorrectAnswers(String quizId, UserAnswersContainer userAnswersContainer) {
-        String emailAddress = userAnswersContainer.getEmailAddress();
+        String emailAddress = userService.getCurrentUserName();
 
         Quiz theQuiz = findQuiz(quizId);
         List<Question> questions = theQuiz.getQuestions();
@@ -53,10 +59,10 @@ public class QuizResultService {
         int correctAnswers = 0;
 
         for (Question question : questions) {
-            String userAnswerId = userAnswersContainer.getQuestionAnswer().get(question.get_id());
-            String correctAnswerIdFromDb = getCorrectAnswer(question).get_id();
+            Set<String> userAnswers = userAnswersContainer.getQuestionAnswer().get(question.get_id());
+            Set<String> correctAnswerIdsFromDb = getCorrectAnswers(question);
 
-            if (Objects.equals(userAnswerId, correctAnswerIdFromDb)) {
+            if (correctAnswerIdsFromDb.containsAll(userAnswers)) {
                 correctAnswers += 1;
             }
         }

@@ -2,7 +2,8 @@
 function getCurrentHostName() {
     const currentPageURL = window.location.href;
     const urlArray = currentPageURL.split("/");
-    return urlArray[0] + "//" + urlArray[2];
+    // return urlArray[0] + "//" + urlArray[2];
+    return "http://localhost:8080"
 }
 
 export default getCurrentHostName;

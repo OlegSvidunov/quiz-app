@@ -24,7 +24,6 @@ export default class QuestionBlock extends React.Component {
     componentDidMount() {
         let getQuizByIdApi = "/api/quiz/";
         let targetURL = getCurrentHostName() + getQuizByIdApi + this.props.location.state.quizId;
-        // let targetURL = "http://localhost:8080/api/quiz/" + this.props.location.state.quizId;
         console.log("request: GET " + targetURL + this.props.location.state.quizId);
         fetch(targetURL)
             .then(response => response.json())
@@ -163,9 +162,7 @@ export default class QuestionBlock extends React.Component {
     sendDataOnServer = (result, email, quizId) => {
         let submitAnswerApi = "/api/quiz/";
         let targetURL = getCurrentHostName() + submitAnswerApi + quizId;
-        // let targetURL = "http://localhost:8080/api/quiz/" + quizId;
         console.log("request: POST " + targetURL)
-
         const answersObject = {
             emailAddress: email,
             questionAnswer: this.convertMapsToObject(this.state.answers)

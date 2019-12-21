@@ -21,12 +21,14 @@ public class UserController {
 
     @GetMapping(GET_USER_NAME_URL_TEMPLATE)
     public String getCurrentUserName() {
-        return quizUserService.getCurrentUserName();
+//        return quizUserService.getCurrentUserName();
+        return "Vasya";
     }
 
     @GetMapping(GET_USER_ROLE_URL_TEMPLATE)
     public String getCurrentUserRole() {
-        return quizUserService.getCurrentUserRole();
+//        return quizUserService.getCurrentUserRole();
+        return "USER";
     }
 
     @DeleteMapping(USER_URL_TEMPLATE)
@@ -35,13 +37,13 @@ public class UserController {
     }
 
     @PostMapping(ADD_USER_URL_TEMPLATE)
-    public ResponseEntity saveNewUser(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
+    public ResponseEntity<String> saveNewUser(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
         if (quizUserService.saveNewUser(username, password, "USER")) {
             response.addHeader("Location", "/login");
         } else {
             response.addHeader("Location", "/registration/error");
         }
-        return new ResponseEntity(HttpStatus.MOVED_PERMANENTLY);
+        return new ResponseEntity<String>(HttpStatus.MOVED_PERMANENTLY);
 
     }
 }

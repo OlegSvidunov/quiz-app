@@ -73,7 +73,7 @@ const userRouting = (
     </React.Fragment>
 );
 
-    function request() {
+    function getUserRole() {
         const currentHost = getCurrentHostName();
         let xhr = new XMLHttpRequest();
         xhr.open('GET', currentHost + "/api/user/role", false);
@@ -81,7 +81,7 @@ const userRouting = (
         return xhr.responseText;
     }
 
-    request().includes("ADMIN")
+    getUserRole().includes("ADMIN")
         ? ReactDOM.render(adminRouting, document.getElementById('root'))
         : ReactDOM.render(userRouting, document.getElementById('root'))
 

@@ -37,9 +37,9 @@ class UserQuizList extends React.Component {
                                 <li className="list-group-item list-group-item-action">
                                     <div className="d-flex justify-content-sm-between">
                                         {quiz.quizTitle}
-                                        <div className="d-flex justify-content-end">{`Result: ${bestResult}`}</div>
-
                                         <div className="d-flex justify-content-end">
+                                            <h1>Example heading <span className="badge badge-secondary">New</span></h1>
+                                            <div className="text-danger mr-2">{`Result: ${bestResult}`}</div>
                                             <Link to={{
                                                 pathname: '/user/pass-quiz',
                                                 state: {quizId: quiz._id}
@@ -72,7 +72,6 @@ class UserQuizList extends React.Component {
         const getAllQuizApi = "/api/quiz/all";
         const currentHostName = getCurrentHostName();
         const targetURL = currentHostName + getAllQuizApi;
-        // const targetURL = "http://localhost:8080/api/quiz/all"
         console.log('Fetching data from resource: ' + targetURL);
 
         fetch(targetURL)
@@ -89,13 +88,11 @@ class UserQuizList extends React.Component {
         const getStatisticApi = "/api/administration/quiz/statistic"
         const currentHostName = getCurrentHostName();
         const targetURL = currentHostName + getStatisticApi;
-        // const targetURL = "http://localhost:8080/api/administration/quiz/statistic"
         console.log('Fetching data from resource: ' + targetURL);
 
         fetch(targetURL)
             .then(response => response.json())
             .then(result => this.setState({usersStatistic : result}))
-            .then(result => console.log(this.state))
             .catch(e => {
                 console.log('Unable to fetch data from server: ' + e);
                 this.setState({apiData: null, wasFetched: false, error: e})
@@ -106,7 +103,6 @@ class UserQuizList extends React.Component {
         const getUserNameApi = "/api/user/name"
         const currentHostName = getCurrentHostName();
         const targetURL = currentHostName + getUserNameApi;
-        // const targetURL = "http://localhost:8080/api/user/name"
         console.log('Fetching data from resource: ' + targetURL);
 
         fetch(targetURL)

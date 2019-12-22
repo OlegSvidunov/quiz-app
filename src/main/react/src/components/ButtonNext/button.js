@@ -1,23 +1,20 @@
 import React from 'react';
-import './button.css';
 
-const ButtonNext = ( { next, isDisabled } ) => {
+const ButtonNext = ({next, isDisabled}) => {
 
-  return (
-    <div className="align-right">
-  <button
-    onClick={next}
-    id='btn'
-    className="btn btn-lg btn-info my-btn"
-    disabled={isDisabled}>
-    Next
-  </button>
-  </div>
-)
-
+    return (
+        <div>
+            <button
+                onClick={next}
+                id='btn'
+                className="btn btn-lg btn-primary float-right mt-3"
+                disabled={isDisabled}>
+                Next
+            </button>
+        </div>
+    )
 }
 
-
 export {
-  ButtonNext
+    ButtonNext
 }

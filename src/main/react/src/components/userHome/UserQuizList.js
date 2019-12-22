@@ -27,24 +27,22 @@ class UserQuizList extends React.Component {
         }
 
         return (
-            <div className="container mt-5">
-                <div className="h2 text-center">Welcome, {this.state.username}</div>
+            <div className="container mt-5 quiz-list">
+                <div className="h2 text-center pb-3">Welcome, {this.state.username}</div>
                 {
                     this.state.quizList.map(quiz => {
-                        let bestResult = this.getBestQuizResult(quiz);
                         return (
                             <div key={quiz._id}>
                                 <li className="list-group-item list-group-item-action">
                                     <div className="d-flex justify-content-sm-between">
                                         {quiz.quizTitle}
                                         <div className="d-flex justify-content-end">
-                                            <h1>Example heading <span className="badge badge-secondary">New</span></h1>
-                                            <div className="text-danger mr-2">{`Result: ${bestResult}`}</div>
+                                            {ResultBlock(this.getBestQuizResult(quiz))}
                                             <Link to={{
                                                 pathname: '/user/pass-quiz',
                                                 state: {quizId: quiz._id}
                                             }}>
-                                                <div className="btn btn-outline-primary mr-2">Start</div>
+                                                <div className="btn btn-primary mr-2 ml-3">Start</div>
                                             </Link>
                                         </div>
                                     </div>
@@ -65,7 +63,7 @@ class UserQuizList extends React.Component {
         });
         return stats.length > 0
             ? stats[stats.length - 1].result + "%"
-            : "Not passed yet"
+            : undefined
     }
 
     fetchQuizListFromServer() {
@@ -116,3 +114,14 @@ class UserQuizList extends React.Component {
 }
 
 export default UserQuizList
+
+export function ResultBlock(resultString) {
+    console.log("qwe" + resultString)
+    if (resultString === undefined) return (<div className="text-light">Not passed yes</div>)
+    else {
+        let resultNumber = parseInt(resultString)
+        if(resultNumber < 50) return (<div className="text-danger">{resultNumber}%</div>);
+        else if(resultNumber >= 50 && resultNumber < 75) return (<div className="text-warning">{resultNumber}%</div>);
+        else if(resultNumber >= 75) return (<div className="text-success">{resultNumber}%</div>)
+    }
+}

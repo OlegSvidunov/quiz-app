@@ -1,10 +1,8 @@
 .main-div {
+  background-color: #EEEEEE;
   position: relative;
-  border: 2px solid black;
   margin-top: 5px;
   height: 100%;
-  border-radius: 10px;
-  background-color: rgba(35, 176, 241, 0.8);
 }
 .my-group {
   margin: 20px;

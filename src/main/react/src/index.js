@@ -54,6 +54,7 @@ const adminRouting = (
 );
 
 const userRouting = (
+    <div className="quiz-list">
     <React.Fragment>
         <Router>
             <div>
@@ -68,9 +69,10 @@ const userRouting = (
             </div>
         </Router>
         <form>
-            <button type="submit" formAction="/logout" style={style} className='btn btn-primary'>Logout</button>
+            <button type="submit" formAction="/logout" style={style} className='btn btn-outline-secondary'>Logout</button>
         </form>
     </React.Fragment>
+        </div>
 );
 
     function getUserRole() {
@@ -81,6 +83,8 @@ const userRouting = (
         return xhr.responseText;
     }
 
+
+    document.body.style = 'background: #EEEEEE;';
     getUserRole().includes("ADMIN")
         ? ReactDOM.render(adminRouting, document.getElementById('root'))
         : ReactDOM.render(userRouting, document.getElementById('root'))

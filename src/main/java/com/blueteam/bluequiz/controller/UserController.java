@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping(GET_USER_ROLE_URL_TEMPLATE)
     public String getCurrentUserRole() {
 //        return quizUserService.getCurrentUserRole();
-        return "USER";
+        return "ADMIN";
     }
 
     @DeleteMapping(USER_URL_TEMPLATE)
@@ -43,7 +43,7 @@ public class UserController {
         } else {
             response.addHeader("Location", "/registration/error");
         }
-        return new ResponseEntity<String>(HttpStatus.MOVED_PERMANENTLY);
+        return new ResponseEntity<>(HttpStatus.MOVED_PERMANENTLY);
 
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import {ButtonNext} from '../ButtonNext';
 import './renderUI.css';
 import {Link} from "react-router-dom";
-import {ResultBlock} from "../userHome/UserQuizList";
+import {ResultBlock} from "../UserHome/UserQuizList";
 
 const Quiz = ({task, answers, id, btn, write, isDisabled}) => {
     return (

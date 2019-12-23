@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import getCurrentHostName from './util/getCurrentHostName'
+import getCurrentHostName from '../../util/getCurrentHostName'
 import React from 'react'
 
 class UsersQuizStatistic extends React.Component {
@@ -8,10 +8,12 @@ class UsersQuizStatistic extends React.Component {
         this.state = {
             statisticApiPath: '/api/administration/quiz/statistic',
             apiData: [],
+            filteredApiData: [],
             wasFetched: true,
             error: null
             };
 
+        this.filterStatisticByUserName = this.filterStatisticByUserName.bind(this)
     }
 
     componentDidMount() {
@@ -21,7 +23,7 @@ class UsersQuizStatistic extends React.Component {
 
         fetch(statisticApiURL)
             .then(response => response.json())
-            .then(result => this.setState({apiData : result}))
+            .then(result => this.setState({apiData : result, filteredApiData: result}))
             .catch(e => {
                 console.log('Unable to fetch data from server: ' + e);
                 this.setState({apiData: null, wasFetched: false, error: e})
@@ -36,12 +38,10 @@ class UsersQuizStatistic extends React.Component {
     }
 
     renderTableData() {
-        console.log("Fetched data: " + JSON.stringify(this.state.apiData));
-        return this.state.apiData.map((statistic) => {
-            const {id, quizId, quizName, result, userEmail, finishedTime} = statistic;
+        return this.state.filteredApiData.map((statistic) => {
+            const {_id, quizId, quizName, result, userEmail, finishedTime} = statistic;
             return (
-                <tr key={id}>
-                    <td>{id}</td>
+                <tr key={_id}>
                     <td>{userEmail}</td>
                     <td>{quizId}</td>
                     <td>{quizName}</td>
@@ -55,7 +55,6 @@ class UsersQuizStatistic extends React.Component {
     renderTableHead() {
         return (
             <tr>
-                <th>#</th>
                 <th>User</th>
                 <th>Quiz id</th>
                 <th>Quiz title</th>
@@ -65,14 +64,41 @@ class UsersQuizStatistic extends React.Component {
         )
     }
 
+    renderSearchForm() {
+        return (
+            <form>
+                <div className="form-row align-items-center">
+                    <div className="col-auto">
+                        <label className="sr-only" htmlFor="inlineFormInputGroup">Username</label>
+                        <div className="input-group mb-2">
+                            <div className="input-group-prepend">
+                                <div className="input-group-text">Filter by user:</div>
+                            </div>
+                            <input type="text" className="form-control" onChange={(event => this.filterStatisticByUserName(event.target.value))}/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        )
+    }
+
+    filterStatisticByUserName(searchParam) {
+        let copy = [...this.state.apiData]
+        copy = copy.filter((statistic) => statistic.userEmail.includes(searchParam));
+        this.setState({
+            filteredApiData: copy
+        })
+    }
+
     render() {
         if (!this.state.wasFetched) {
             return <div className="h2 text-center">Error on loading data from server</div>
         }
-
+        console.log(this.state)
         return (
             <div className="container">
                 <div id='title' className="h2 text-center">Users statistic</div>
+                {this.renderSearchForm()}
                 <table className="table">
                     <thead>
                     {this.renderTableHead()}

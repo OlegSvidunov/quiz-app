@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CatImage from "./image/cute_kitty.png";
+import CatImage from "../../image/cute_kitty.png";
 
 class Welcome extends Component {
     render() {

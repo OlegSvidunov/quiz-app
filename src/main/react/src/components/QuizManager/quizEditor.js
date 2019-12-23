@@ -69,10 +69,10 @@ class QuizEditor extends React.Component {
                 </ul>
                 <div className="d-flex justify-content-between mt-3 mb-5">
                     <div className="btn btn-primary" onClick={this.addNewQuestion}>Add a question</div>
-                    <Link to="/admin">
+                     <Link  to="/admin">
                         <div className="btn btn-primary" onClick={this.state.quizId === undefined
-                            ? this.doServerQuizInsertRequest
-                            : this.doServerQuizUpdateRequest}>Save quiz
+                            ? () => this.doServerQuizInsertRequest()
+                            : () => this.doServerQuizUpdateRequest()}>Save quiz
                         </div>
                     </Link>
                 </div>
@@ -180,12 +180,12 @@ class QuizEditor extends React.Component {
         return quiz
     }
 
-    doServerQuizInsertRequest = () => {
+    async doServerQuizInsertRequest() {
         let quizInsertApi = "/api/quiz/add";
         let targetURL = getCurrentHostName() + quizInsertApi;
         console.log("request: POST " + targetURL);
 
-        fetch(targetURL, {
+        await fetch(targetURL, {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
@@ -197,11 +197,11 @@ class QuizEditor extends React.Component {
             .catch(error => console.log(error));
     };
 
-    doServerQuizUpdateRequest = () => {
+    async doServerQuizUpdateRequest() {
         let quizUpdateApi = "/api/quiz/";
         let targetURL = getCurrentHostName() + quizUpdateApi + this.state.quizId;
         console.log("request: PUT " + targetURL);
-        fetch(targetURL, {
+        await fetch(targetURL, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",

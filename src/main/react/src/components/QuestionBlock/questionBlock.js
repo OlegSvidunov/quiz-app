@@ -1,7 +1,6 @@
 import React from 'react';
-import {Quiz, Result, Warning} from '../renderUI/renderUI';
+import {Quiz, Result, Warning} from '../RenderUI/renderUI';
 import './questionBlock.css';
-import Spinner from '../spinner';
 import Header from "../Header";
 import getCurrentHostName from "../../util/getCurrentHostName";
 
@@ -54,8 +53,7 @@ export default class QuestionBlock extends React.Component {
         });
         return answers.map((el) => {
             return (
-                <li /* onClick={(e) => this.writeAnswer(el.label, id, e.target)} */
-                    className='my-list list-group-item list-group-item-action' key={el._id} id={el._id}>
+                <li className='my-list list-group-item list-group-item-action' key={el._id} id={el._id}>
                     {el.answerTitle}
                 </li>)
         })
@@ -88,10 +86,7 @@ export default class QuestionBlock extends React.Component {
 
     writeAnswer = (el, id, task) => {
         this.addChoiceStyle(el.id);
-
         const asw = Array.from(document.querySelectorAll('.list-group-item'));
-        console.log('asw', asw)
-
         const arrayAnswers = asw.map(el => {
             if (el.className.includes('my-choise')) {
                 return el.id
@@ -99,20 +94,16 @@ export default class QuestionBlock extends React.Component {
             return null
         }).filter(el => !!el)
 
-        console.log('arrayAnswers', arrayAnswers)
-
+        console.log('arrayAnswers',
+            arrayAnswers)
         if (Object.keys(arrayAnswers).length > 0) {
             this.setState({isButtonNextDisabled: false})
         } else {
             this.setState({isButtonNextDisabled: true})
         }
-
         let map = new Map(this.state.answers);
         map.set(task._id, arrayAnswers);
-        console.log("task id", task)
-
         this.setState({answers: map});
-
         console.log("THIS STATE WITH ANSWERS: ", map)
     }
 
@@ -124,15 +115,12 @@ export default class QuestionBlock extends React.Component {
         console.log("ON_NEXT_CLICK QUESTIONS are -", quiz);
         console.log("ON_NEXT_CLICK ANSWERS are -", answers);
         if (id < lastQuestionIdNumber) {
-            // this.removeChoiceStyle();
             id++;
             this.setState({id});
             if (id === lastQuestionIdNumber) {
                 document.getElementById('btn')
                     .innerHTML = 'Finish';
             }
-
-
         } else {
             const answered = this.countMark(answers);
             this.setState({
@@ -195,17 +183,8 @@ export default class QuestionBlock extends React.Component {
         if (!this.state.quiz) {
             return <div className="h2 text-center">Error on loading data from server</div>
         }
-
         console.log("--------------", this.state.questions);
             const {id, quiz, answered, finish} = this.state;
-            if (!quiz) {
-                return (
-                    <div>
-                        <Header/>
-                        <Spinner/>
-                    </div>
-                );
-            }
             const task = this.showTasks(quiz.questions, id);
             const answers = this.getAnswers(quiz.questions, id);
 
@@ -222,8 +201,8 @@ export default class QuestionBlock extends React.Component {
                       isDisabled={this.state.isButtonNextDisabled}
                       id={task._id}
                       btn={this.onNextClick}
-                      write={this.writeAnswer}
-                /></div>)
+                      write={this.writeAnswer}/>
+                </div>)
         } else {
             if (answered >= 0) {
                 if (this.state.quizResultPercents === null) {

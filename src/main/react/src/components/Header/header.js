@@ -1,5 +1,4 @@
 import React  from 'react';
-import './header.css';
 
 const  Header = ({quizTitle}) => {
     return (
@@ -7,7 +6,6 @@ const  Header = ({quizTitle}) => {
      <h2>{quizTitle}</h2>
     </div>
     );
-
 }
 
 export default Header;

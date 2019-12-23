@@ -25,6 +25,7 @@ class AdminHomePage extends React.Component {
         }
 
         if (Object.keys(this.state.apiData).length < 1) {
+            console.log("THIS STATE SIZE:", this.state)
                 return (
                     <div>
                         <div className="h2 text-center mb-3"> Nobody has created a quiz yet :(</div>
@@ -54,7 +55,7 @@ class AdminHomePage extends React.Component {
                                     }}>
                                         <div className="btn btn-outline-primary mr-2">Open</div>
                                     </Link>
-                                    <div className="btn btn-outline-danger" onClick={this.doServerDeleteQuizRequest(quiz)}>Delete</div>
+                                    <div className="btn btn-outline-danger" onClick={() => this.doServerDeleteQuizRequest(quiz)}>Delete</div>
                                 </div>
                                 </div>
                             </li>
@@ -74,7 +75,7 @@ class AdminHomePage extends React.Component {
                 state: {quiz: newQuiz}
             }}>
                 <div className="text-center">
-                    <div className="btn btn-lg btn-primary mr-4">Create a quiz!</div>
+                    <div className="btn btn-lg btn-primary mt-1">Create a quiz!</div>
                 </div>
             </Link>
         )
@@ -101,12 +102,12 @@ class AdminHomePage extends React.Component {
         }
     }
 
-    doServerDeleteQuizRequest = (quiz) => () => {
+   async doServerDeleteQuizRequest(quiz) {
         console.log(this.state)
         let quizDeleteApi = "/api/quiz/";
         let targetURL = getCurrentHostName() + quizDeleteApi + quiz._id.toString();
         console.log("request: DELETE " + targetURL)
-        fetch(targetURL, {
+        await fetch(targetURL, {
             method: "DELETE",
             headers: {
                 "Content-type": "application/json",
@@ -117,8 +118,7 @@ class AdminHomePage extends React.Component {
             .then(this.getListOfQuizzesFromServer)
             .catch(error => console.log(error));
 
-        document.location.reload()
-
+        this.getListOfQuizzesFromServer()
     }
 
     getListOfQuizzesFromServer() {

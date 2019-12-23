@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Route, Link, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom'
-import Welcome from './welcome'
+import Welcome from './components/AdminHome/welcome'
 import NotFound from './notFound'
-import UsersQuizStatistic from "./usersQuizStatistic";
-import AdminHomePage from "./components/quiz-manager/adminHomePage";
-import QuizEditor from "./components/quiz-manager/quizEditor";
+import UsersQuizStatistic from "./components/AdminHome/usersQuizStatistic";
+import AdminHomePage from "./components/QuizManager/adminHomePage";
+import QuizEditor from "./components/QuizManager/quizEditor";
 
-import UserQuizList from "./components/userHome/UserQuizList";
+import UserQuizList from "./components/UserHome/UserQuizList";
 import QuestionBlock from "./components/QuestionBlock";
 import getCurrentHostName from "./util/getCurrentHostName";
 

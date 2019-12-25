@@ -168,7 +168,7 @@ export default class QuestionBlock extends React.Component {
 
         const answersObject = {
             emailAddress: email,
-            questionAnswer: this.convertMapsToObject(this.state.answers)
+            questionIdToAnswerId: this.convertMapsToObject(this.state.answers)
         }
         const report = JSON.stringify(answersObject)
         console.log("RESULT", report);

@@ -38,7 +38,6 @@ public class UserAnswersControllerTest extends ApplicationTests {
         statisticRepository.deleteByUserEmail("admin");
     }
 
-    @Disabled
     @Test
     public void shouldGet100PercentWithAllCorrectAnswers() {
 
@@ -47,7 +46,7 @@ public class UserAnswersControllerTest extends ApplicationTests {
         Set answer2 = new HashSet();
         answer2.add("5");
         Set answer3 = new HashSet();
-        answer2.add("8");
+        answer3.add("8");
 
         Map<String, Set<String>> question = new HashMap<>();
         question.put("1", answer1);
@@ -72,7 +71,6 @@ public class UserAnswersControllerTest extends ApplicationTests {
                 .body("result", Matchers.equalTo(100.0f));
     }
 
-    @Disabled
     @Test
     public void shouldGet66PercentWith1CorrectAnswerOf3() {
 
@@ -81,7 +79,7 @@ public class UserAnswersControllerTest extends ApplicationTests {
         Set answer2 = new HashSet();
         answer2.add("6");
         Set answer3 = new HashSet();
-        answer2.add("8");
+        answer3.add("8");
 
         Map<String, Set<String>> question = new HashMap<>();
         question.put("1", answer1);
@@ -106,7 +104,6 @@ public class UserAnswersControllerTest extends ApplicationTests {
                 .body("result", Matchers.equalTo(66.0f));
     }
 
-    @Disabled
     @Test
     public void shouldGet0PercentWithoutCorrectAnswers() {
 
@@ -115,7 +112,7 @@ public class UserAnswersControllerTest extends ApplicationTests {
         Set answer2 = new HashSet();
         answer2.add("6");
         Set answer3 = new HashSet();
-        answer2.add("9");
+        answer3.add("9");
 
         Map<String, Set<String>> question = new HashMap<>();
         question.put("1", answer1);

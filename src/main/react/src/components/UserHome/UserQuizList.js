@@ -40,26 +40,24 @@ class UserQuizList extends React.Component {
     }
 
     printQuiz(quiz) {
-            {
-                return (
-                    <div key={quiz._id}>
-                        <li className="list-group-item list-group-item-action">
-                            <div className="d-flex justify-content-sm-between">
-                                {quiz.quizTitle}
-                                <div className="d-flex justify-content-end">
-                                    {ResultBlock(this.getBestQuizResult(quiz))}
-                                    <Link to={{
-                                        pathname: '/user/pass-quiz',
-                                        state: {quizId: quiz._id}
-                                    }}>
-                                        <div className="btn btn-primary mr-2 ml-3">Start</div>
-                                    </Link>
-                                </div>
-                            </div>
-                        </li>
+        return (
+            <div key={quiz._id}>
+                <li className="list-group-item list-group-item-action">
+                    <div className="d-flex justify-content-sm-between">
+                        {quiz.quizTitle}
+                        <div className="d-flex justify-content-end">
+                            {ResultBlock(this.getBestQuizResult(quiz))}
+                            <Link to={{
+                                pathname: '/user/pass-quiz',
+                                state: {quizId: quiz._id}
+                            }}>
+                                <div className="btn btn-primary mr-2 ml-3">Start</div>
+                            </Link>
+                        </div>
                     </div>
-                )
-            }
+                </li>
+            </div>
+        )
     }
 
     renderSearchForm() {

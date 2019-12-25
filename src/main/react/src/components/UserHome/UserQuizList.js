@@ -155,7 +155,7 @@ export default UserQuizList
 export function ResultBlock(resultString) {
     console.log(resultString);
     if (resultString === undefined) {
-        return (<div className="text-secondary">Not passed yes</div>)
+        return (<div className="text-secondary">Not passed yet</div>)
     } else {
         let resultNumber = parseInt(resultString);
         if (resultNumber < 50) return (<div className="text-danger"> {resultNumber}%</div>);

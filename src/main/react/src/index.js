@@ -23,16 +23,16 @@ const adminRouting = (
             <div>
                 <ul>
                     <li>
-                        <Link to="/">Admin home</Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <Link to="/admin">Admin quiz manager</Link>
+                        <Link to="/admin">Quiz manager</Link>
                     </li>
                     <li>
-                        <Link to="/admin/statistic">Admin Statistic</Link>
+                        <Link to="/admin/statistic">Statistic</Link>
                     </li>
                     <li>
-                        <Link to="/user/home">User home</Link>
+                        <Link to="/user/home">User page</Link>
                     </li>
                 </ul>
                 <Switch>

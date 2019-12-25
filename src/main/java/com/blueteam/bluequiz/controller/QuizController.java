@@ -1,7 +1,9 @@
 package com.blueteam.bluequiz.controller;
 
+import com.blueteam.bluequiz.dto.QuizDto;
 import com.blueteam.bluequiz.entities.Quiz;
 import com.blueteam.bluequiz.service.QuizManagerService;
+import com.blueteam.bluequiz.service.TransformService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,10 +22,13 @@ import static com.blueteam.bluequiz.controller.Api.*;
 public class QuizController {
 
     private final QuizManagerService quizManagerService;
+    private final TransformService transformService;
 
     @Autowired
-    public QuizController(QuizManagerService quizManagerService) {
+    public QuizController(QuizManagerService quizManagerService,
+                          TransformService transformService) {
         this.quizManagerService = quizManagerService;
+        this.transformService = transformService;
     }
 
     @GetMapping(value = QUIZ_URL_TEMPLATE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -39,12 +44,14 @@ public class QuizController {
     }
 
     @PostMapping(value = ADD_QUIZ_URL_TEMPLATE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void add(@RequestBody Quiz quiz) {
+    public void add(@RequestBody QuizDto quizDto) {
+        Quiz quiz = transformService.transformQuizDtoToQuizEntity(quizDto);
         quizManagerService.insert(quiz);
     }
 
     @PutMapping(value = UPDATE_QUIZ_URL_TEMPLATE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable String id, @RequestBody Quiz quiz) {
+    public void update(@PathVariable String id, @RequestBody QuizDto quizDto) {
+        Quiz quiz = transformService.transformQuizDtoToQuizEntity(quizDto);
         quizManagerService.update(id, quiz);
     }
 

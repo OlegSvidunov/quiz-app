@@ -97,7 +97,7 @@ class UsersQuizStatistic extends React.Component {
         console.log(this.state)
         return (
             <div className="container">
-                <div id='title' className="h2 text-center">Users statistic</div>
+                <div id='title' className="h1 text-center">Users statistic</div>
                 {this.renderSearchForm()}
                 <table className="table">
                     <thead>

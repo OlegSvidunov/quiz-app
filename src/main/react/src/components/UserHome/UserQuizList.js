@@ -37,7 +37,7 @@ class UserQuizList extends React.Component {
                                     <div className="d-flex justify-content-sm-between">
                                         {quiz.quizTitle}
                                         <div className="d-flex justify-content-end">
-                                            {ResultBlock(this.getBestQuizResult(quiz))}
+                                            Best result: {ResultBlock(this.getBestQuizResult(quiz))}
                                             <Link to={{
                                                 pathname: '/user/pass-quiz',
                                                 state: {quizId: quiz._id}
@@ -116,8 +116,10 @@ class UserQuizList extends React.Component {
 export default UserQuizList
 
 export function ResultBlock(resultString) {
-    console.log("qwe" + resultString)
-    if (resultString === undefined) return (<div className="text-light">Not passed yes</div>)
+    console.log(resultString)
+    if (resultString === undefined) {
+        return (<div className="text-secondary">Not passed yes</div>)
+    }
     else {
         let resultNumber = parseInt(resultString)
         if(resultNumber < 50) return (<div className="text-danger">{resultNumber}%</div>);

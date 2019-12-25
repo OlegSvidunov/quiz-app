@@ -16,7 +16,7 @@ class QuestionEditor extends React.Component {
 
     render() {
         return <div className="container ">
-            <div className="h1 text-center mb-5">QUESTION EDITOR</div>
+            <div className="h1 text-center mb-5">Question editor</div>
 
 
             <div className="input-group input-group-lg mb-5">
@@ -29,7 +29,7 @@ class QuestionEditor extends React.Component {
             </div>
 
             {this.state.questionAnswers.map(answer => {
-                return <div key={answer.answerId}>
+                return <div key={answer._id}>
                     <div className="input-group mb-3">
                         <div className="input-group-append">
                             <span className="input-group-text">Answer: </span>

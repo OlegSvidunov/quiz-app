@@ -16,6 +16,8 @@ class QuizEditor extends React.Component {
             showEditFrom: false,
             currentQuestion: null,
         }
+        this.doServerQuizInsertRequest = this.doServerQuizInsertRequest.bind(this)
+        this.doServerQuizUpdateRequest = this.doServerQuizUpdateRequest.bind(this)
     }
 
     render() {
@@ -27,7 +29,7 @@ class QuizEditor extends React.Component {
 
         return (
             <div className="container">
-                <div className="h1 text-center">QUIZ EDITOR</div>
+                <div className="h1 text-center">Quiz editor</div>
 
                 <Link to="/admin/">
                     <div className="d-flex justify-content-between">
@@ -69,12 +71,10 @@ class QuizEditor extends React.Component {
                 </ul>
                 <div className="d-flex justify-content-between mt-3 mb-5">
                     <div className="btn btn-primary" onClick={this.addNewQuestion}>Add a question</div>
-                     <Link  to="/admin">
                         <div className="btn btn-primary" onClick={this.state.quizId === undefined
-                            ? () => this.doServerQuizInsertRequest()
-                            : () => this.doServerQuizUpdateRequest()}>Save quiz
+                            ? this.doServerQuizInsertRequest
+                            : this.doServerQuizUpdateRequest}>Save quiz
                         </div>
-                    </Link>
                 </div>
             </div>
         )
@@ -192,8 +192,9 @@ class QuizEditor extends React.Component {
             },
             body: this.getQuizForSendingToServer()
         })
-            .then(response => response.json())
-            .then((responseJson) => console.log(responseJson))
+            .then(response => {
+                if (response.status === 200) this.props.history.push("/admin")
+            })
             .catch(error => console.log(error));
     };
 
@@ -208,8 +209,9 @@ class QuizEditor extends React.Component {
             },
             body: this.getQuizForSendingToServer()
         })
-            .then(response => response.json())
-            .then((responseJson) => console.log(responseJson))
+            .then(response => {
+                if (response.status === 200) this.props.history.push("/admin")
+            })
             .catch(error => console.log(error));
     }
 }

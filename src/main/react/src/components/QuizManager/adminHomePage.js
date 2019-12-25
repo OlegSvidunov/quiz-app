@@ -37,7 +37,7 @@ class AdminHomePage extends React.Component {
         return (
             <div className="container">
                 <div className="text-center mb-3">
-                    <div className="h1 mb-5">QUIZ MANAGER</div>
+                    <div className="h1">Quiz manager</div>
                     {this.getCreateQuizButton()}
                 </div>
                 {

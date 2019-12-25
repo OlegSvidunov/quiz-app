@@ -72,6 +72,7 @@ public class UserAnswersControllerTest extends ApplicationTests {
                 .body("result", Matchers.equalTo(100.0f));
     }
 
+    @Disabled
     @Test
     public void shouldGet66PercentWith1CorrectAnswerOf3() {
 

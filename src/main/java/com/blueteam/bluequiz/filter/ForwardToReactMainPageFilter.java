@@ -5,9 +5,13 @@ import org.springframework.stereotype.Component;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class ForwardToReactMainPageFilter implements Filter {
+
+    static final List<String> allowedURIsForSpringToHandleRequest = Arrays.asList("/api", "/static", "/login", "/logout", "/registration");
 
     @Override
     public void doFilter(ServletRequest request,
@@ -17,34 +21,12 @@ public class ForwardToReactMainPageFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         String requestURI = req.getRequestURI();
 
-        //handle api requests by spring
-        if (requestURI.startsWith("/api")) {
-            chain.doFilter(request, response);
-            return;
-        }
-
-        //handle static requests by spring
-        if (requestURI.startsWith("/static")) {
-            chain.doFilter(request, response);
-            return;
-        }
-
-        //handle login requests by spring
-        if (requestURI.startsWith("/login")) {
-            chain.doFilter(request, response);
-            return;
-        }
-
-        //handle logout requests by spring
-        if (requestURI.startsWith("/logout")) {
-            chain.doFilter(request, response);
-            return;
-        }
-
-        //handle registration requests by spring
-        if (requestURI.startsWith("/registration")) {
-            chain.doFilter(request, response);
-            return;
+        //handle api, static and security requests by Spring
+        for(String allowedURI: allowedURIsForSpringToHandleRequest) {
+            if (requestURI.startsWith(allowedURI)) {
+                chain.doFilter(request, response);
+                return;
+            }
         }
 
         //let react handle any other requests, by forwarding them to index.html

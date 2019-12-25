@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +21,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Log4j
 @Service
@@ -69,7 +71,7 @@ public class UserService implements UserDetailsService {
         return authentication.getName();
     }
 
-    public void saveNewUser(String username, String password, String role) {
+    public boolean saveNewUser(String username, String password, String role) {
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             throw new IllegalArgumentException("User can't have empty name or password!");
         }
@@ -79,9 +81,9 @@ public class UserService implements UserDetailsService {
                     .password(new BCryptPasswordEncoder().encode(password))
                     .roles(role)
                     .build());
-        } else {
-            throw new IllegalStateException(String.format("User with name %s already exists", username));
+            return true;
         }
+        return false;
     }
 
     private boolean hasUserUniqueName(String username) {
@@ -89,6 +91,14 @@ public class UserService implements UserDetailsService {
         query.addCriteria(Criteria.where("username").is(username));
         List<User> users = mongoTemplate.find(query, User.class);
         return users.isEmpty();
+    }
+
+    public String getCurrentUserRole() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
     }
 }
 

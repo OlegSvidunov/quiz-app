@@ -1,6 +1,6 @@
 package com.blueteam.bluequiz.controller;
 
-import com.blueteam.bluequiz.service.QuizUserService;
+import com.blueteam.bluequiz.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +13,9 @@ import static com.blueteam.bluequiz.controller.Api.*;
 @RequestMapping(BASE_URL_TEMPLATE)
 public class UserController {
 
-    final QuizUserService quizUserService;
+    final UserService quizUserService;
 
-    public UserController(QuizUserService quizUserService) {
+    public UserController(UserService quizUserService) {
         this.quizUserService = quizUserService;
     }
 

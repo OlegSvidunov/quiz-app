@@ -3,10 +3,12 @@ package com.blueteam.bluequiz.service;
 import com.blueteam.bluequiz.entities.Quiz;
 import com.blueteam.bluequiz.entities.QuizResult;
 import com.blueteam.bluequiz.persistence.QuizResultRepository;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+@Log4j
 @Service
 public class SaveQuizResultService {
 

@@ -15,45 +15,48 @@ import java.util.Optional;
 @Service
 public class QuizManagerService {
 
-    private final QuizRepository quizRepository;
+    private final QuizRepository repository;
 
     @Autowired
     public QuizManagerService(QuizRepository quizManagerRepository) {
-        this.quizRepository = quizManagerRepository;
+        this.repository = quizManagerRepository;
     }
 
     public Optional<Quiz> findById(String id) {
-        return quizRepository.findById(id);
+        return repository.findById(id);
     }
 
     public List<Quiz> getListOfAllQuizzes() {
-        return quizRepository.findAll();
+        return repository.findAll();
     }
 
     public void insert(Quiz quiz) {
         if (hasRoleAdmin()) {
-             Quiz newQuiz = Quiz.builder()
-                .quizTitle(quiz.getQuizTitle())
-                .questions(quiz.getQuestions())
-                .build();
-        quizRepository.insert(newQuiz);
+            Quiz newQuiz = Quiz.builder()
+                    .quizTitle(quiz.getQuizTitle())
+                    .questions(quiz.getQuestions())
+                    .build();
+            repository.insert(newQuiz);
+        }
     }
 
     public void update(String id, Quiz quiz) {
         if (hasRoleAdmin()) {
-                if (quizRepository.existsById(id)) {
-            quizRepository.save(Quiz.builder()
-                    ._id(id)
-                    .quizTitle(quiz.getQuizTitle())
-                    .build());
+            if (repository.existsById(id)) {
+                repository.save(Quiz.builder()
+                        ._id(id)
+                        .quizTitle(quiz.getQuizTitle())
+                        .questions(quiz.getQuestions())
+                        .build());
+            }
         }
     }
 
     public void deleteById(String id) {
         if (hasRoleAdmin()) {
-               quizRepository.deleteById(id);
+            repository.deleteById(id);
+        }
     }
-}
 
     private boolean hasRoleAdmin() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

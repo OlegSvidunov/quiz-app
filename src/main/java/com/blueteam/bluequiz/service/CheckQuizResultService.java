@@ -2,13 +2,16 @@ package com.blueteam.bluequiz.service;
 
 import com.blueteam.bluequiz.entities.*;
 import com.blueteam.bluequiz.persistence.QuizRepository;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
-import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+@Log4j
 @Service
 public class CheckQuizResultService {
 
@@ -28,11 +31,11 @@ public class CheckQuizResultService {
         return quizRepository.findById(quizId).orElseThrow(IllegalStateException::new);
     }
 
-    public Answer getCorrectAnswer(Question question) {
+    public Set<String> getCorrectAnswers(Question question) {
         return question.getQuestionAnswers().stream()
                 .filter(Answer::isCorrect)
-                .findFirst()
-                .orElseThrow(IllegalStateException::new);
+                .map(Answer::get_id)
+                .collect(Collectors.toSet());
     }
 
     public QuizResult checkPassedQuiz(String quizId, UserAnswersContainer userAnswersContainer) {
@@ -55,10 +58,10 @@ public class CheckQuizResultService {
 
 
         for (Question question : questions) {
-            String userAnswerId = userAnswersContainer.getQuestionIdToAnswerId().get(question.get_id());
-            String correctAnswerIdFromDb = getCorrectAnswer(question).get_id();
+            Set<String> userAnswers = userAnswersContainer.getQuestionIdToAnswerId().get(question.get_id());
+            Set<String> correctAnswerIdsFromDb = getCorrectAnswers(question);
 
-            if (Objects.equals(userAnswerId, correctAnswerIdFromDb)) {
+            if (correctAnswerIdsFromDb.containsAll(userAnswers)) {
                 correctAnswers += 1;
             }
         }

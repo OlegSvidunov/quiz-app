@@ -1,10 +1,6 @@
 package com.blueteam.bluequiz.security;
 
-<<<<<<< HEAD
 import com.blueteam.bluequiz.service.UserService;
-=======
-import com.blueteam.bluequiz.service.QuizUserService;
->>>>>>> master
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

@@ -49,7 +49,7 @@ class QuestionEditor extends React.Component {
                         </div>
                         {
                             Object.keys(this.state.questionAnswers).length > 2
-                                ?  <div className="btn btn-outline-danger" onClick={this.deleteAnswer(answer)}>Delete</div>
+                                ?  <div className="btn btn-danger" onClick={this.deleteAnswer(answer)}>Delete</div>
                                 : false
                         }
                     </div>

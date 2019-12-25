@@ -23,7 +23,7 @@ const adminRouting = (
             <div>
                 <ul>
                     <li>
-                        <Link to="/">Welcome</Link>
+                        <Link to="/">Admin home</Link>
                     </li>
                     <li>
                         <Link to="/admin">Admin quiz manager</Link>
@@ -48,7 +48,7 @@ const adminRouting = (
             </div>
         </Router>
         <form>
-            <button type="submit" formAction="/logout" style={style} className='btn btn-primary'>Logout</button>
+            <button type="submit" formAction="/logout" style={style} className='btn btn-outline-secondary'>Logout</button>
         </form>
     </React.Fragment>
 );

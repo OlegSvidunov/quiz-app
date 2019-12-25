@@ -28,8 +28,8 @@ class AdminHomePage extends React.Component {
             console.log("THIS STATE SIZE:", this.state)
                 return (
                     <div>
-                        <div className="h2 text-center mb-3"> Nobody has created a quiz yet :(</div>
-                        <div className="h2 text-center"> Be the first one!</div>
+                        <div className="h2 text-center text-secondary mb-3"> Nobody has created a quiz yet :(</div>
+                        <div className="h2 text-center text-secondary"> Be the first  one!</div>
                         {this.getCreateQuizButton()}
                     </div>)
         }
@@ -53,9 +53,9 @@ class AdminHomePage extends React.Component {
                                         pathname: '/admin/quiz-editor',
                                         state: {quiz}
                                     }}>
-                                        <div className="btn btn-outline-primary mr-2">Open</div>
+                                        <div className="btn btn-primary mr-2">Open</div>
                                     </Link>
-                                    <div className="btn btn-outline-danger" onClick={() => this.doServerDeleteQuizRequest(quiz)}>Delete</div>
+                                    <div className="btn btn-danger" onClick={() => this.doServerDeleteQuizRequest(quiz)}>Delete</div>
                                 </div>
                                 </div>
                             </li>

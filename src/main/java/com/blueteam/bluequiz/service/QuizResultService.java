@@ -50,9 +50,8 @@ public class QuizResultService {
     }
 
     public QuizResult checkCorrectAnswers(String quizId, UserAnswersContainer userAnswersContainer) {
-//        String emailAddress = userService.getCurrentUserName();
+        String emailAddress = userService.getCurrentUserName();
 
-        String emailAddress = "Vasya";
         Quiz theQuiz = findQuiz(quizId);
         List<Question> questions = theQuiz.getQuestions();
 

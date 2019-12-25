@@ -54,12 +54,12 @@ class QuizEditor extends React.Component {
                             <div className="h4 d-flex justify-content-sm-between">
                                 {question.questionTitle}
                                 <div className="d-flex justify-content-end">
-                                    <div className="btn btn-outline-primary mr-2"
+                                    <div className="btn btn-primary mr-2"
                                          onClick={this.openEditForm(question)}>Edit
                                     </div>
                                     {
                                         Object.keys(this.state.questions).length > 1
-                                            ? <div className="btn btn-outline-danger"
+                                            ? <div className="btn btn-danger"
                                                    onClick={this.deleteQuestion(question)}>Delete</div>
                                             : false
                                     }

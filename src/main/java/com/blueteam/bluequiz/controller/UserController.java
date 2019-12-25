@@ -21,14 +21,12 @@ public class UserController {
 
     @GetMapping(GET_USER_NAME_URL_TEMPLATE)
     public String getCurrentUserName() {
-//        return quizUserService.getCurrentUserName();
-        return "Vasya";
+        return quizUserService.getCurrentUserName();
     }
 
     @GetMapping(GET_USER_ROLE_URL_TEMPLATE)
     public String getCurrentUserRole() {
-//        return quizUserService.getCurrentUserRole();
-        return "ADMIN";
+        return quizUserService.getCurrentUserRole();
     }
 
     @DeleteMapping(USER_URL_TEMPLATE)

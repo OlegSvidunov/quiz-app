@@ -18,14 +18,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.quizUserService = quizUserService;
     }
 
-/*    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/registration**", "/registration/error**", "/api/user/add/**");
-    }*/
-
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/**");
+        web.ignoring().antMatchers("/registration**", "/registration/error**", "/api/user/add/**");
     }
 
     @Override

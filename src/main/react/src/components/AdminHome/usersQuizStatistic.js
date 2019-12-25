@@ -58,7 +58,7 @@ class UsersQuizStatistic extends React.Component {
                 <th>User</th>
                 <th>Quiz id</th>
                 <th>Quiz title</th>
-                <th>Result</th>
+                <th>Result, %</th>
                 <th>Passed time stamp</th>
             </tr>
         )

@@ -1,6 +1,10 @@
 package com.blueteam.bluequiz.security;
 
+<<<<<<< HEAD
 import com.blueteam.bluequiz.service.UserService;
+=======
+import com.blueteam.bluequiz.service.QuizUserService;
+>>>>>>> master
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/registration", "/api/user/add/**");
+        web.ignoring().antMatchers("/registration**", "/registration/error**", "/api/user/add/**");
     }
 
     @Override
@@ -31,9 +35,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .failureUrl("/login/error")
                 .permitAll()
                 .and()
                 .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
                 .permitAll();
     }
 

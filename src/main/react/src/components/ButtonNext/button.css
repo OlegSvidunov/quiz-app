@@ -1,0 +1,29 @@
+.my-btn {
+  border: 1px solid darkgreen;
+  margin: 20px;
+  position: relative;
+  align-content: flex-end;
+}
+.align-right {
+  width: 100%;
+  text-align: end;
+}
+#btn {
+  border: 2px solid rgb(5, 63, 1);
+  outline: none;
+  background: linear-gradient(rgb(6, 77, 4), rgb(12, 128, 22)) rgb(20, 197, 29);
+  transition: 0.2s;
+}
+#btn:hover {
+  background: linear-gradient(#f5ae00, #f59500) #f5ae00;
+  border: 2px solid rgb(216, 202, 10);
+  box-shadow: rgb(246, 244, 122);
+
+}
+#btn:active {
+   background: linear-gradient(#f59500, #f5ae00) #f59500;
+   border: 2px solid rgb(241, 237, 5);
+   box-shadow: rgb(255, 255, 255);
+
+
+  }

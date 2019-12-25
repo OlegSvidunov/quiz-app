@@ -16,6 +16,11 @@
 
     <properties>
         <java.version>1.8</java.version>
+
+        <sonar.projectKey>quiz-blue</sonar.projectKey>
+        <sonar.organization>quiz-blue</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.login>2dbdf359a98e345dc00a12310dfa3bb6896dde08</sonar.login>
     </properties>
 
     <profiles>
@@ -101,12 +106,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate.ogm</groupId>-->
-<!--            <artifactId>hibernate-ogm-mongodb</artifactId>-->
-<!--            <version>${hibernate.version}</version>-->
-<!--        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.hibernate.ogm/hibernate-ogm-bom -->
         <dependency>
             <groupId>org.hibernate.ogm</groupId>
             <artifactId>hibernate-ogm-bom</artifactId>
@@ -114,6 +113,15 @@
             <type>pom</type>
         </dependency>
 
+        <!--Security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <!--Security-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -133,6 +141,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
 
             <!-- This plugin generates html/css/js files from our React components -->
             <plugin>
@@ -204,7 +213,31 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- attached to Maven test phase -->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.7.0.1746</version>
+            </plugin>
         </plugins>
     </build>
 

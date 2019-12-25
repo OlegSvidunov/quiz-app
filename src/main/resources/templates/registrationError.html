@@ -10,9 +10,12 @@
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
 </head>
 <body>
+
+
 <div class="container">
-    <form class="form-signin" method="post" action="/login">
-        <h2 class="form-signin-heading text-center">Please sign in</h2>
+    <form id="form-wrap" class="form-signin"  method="post" action="/api/user/add">
+        <h2 class="form-signin-heading text-center">Account creation</h2>
+        <h5 class="form-text text-danger">Username already in use</h5>
         <p>
             <label for="username" class="sr-only">Username</label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
@@ -21,9 +24,7 @@
             <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <a class="btn btn-lg btn-primary btn-block" href="/registration">Create an account</a>
-
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Create!</button>
     </form>
 </div>
 </body></html>

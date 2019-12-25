@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Map;
+import java.util.Set;
 
 @Getter
 @Builder
@@ -13,5 +14,5 @@ import java.util.Map;
 @AllArgsConstructor
 public class UserAnswersContainer {
     private String emailAddress;
-    private Map<String, String> questionIdToAnswerId;
+    private Map<String, Set<String>> questionIdToAnswerId;
 }

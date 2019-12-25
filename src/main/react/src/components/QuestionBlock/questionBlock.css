@@ -1,0 +1,25 @@
+
+.my-list {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(10, 90, 10) !important;
+    color: white !important;
+    font-size: 1.1em;
+    margin-bottom: 4px;
+
+}
+
+.my-choise {
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.1em;
+    margin-bottom: 4px;
+    background: linear-gradient(#f5ae00, #f59500) #f5ae00 !important;
+    border: 2px solid rgb(216, 202, 10);
+    box-shadow: rgb(246, 244, 122);
+    color: rgb(0, 0, 0) !important;
+    font-weight: bold;
+    border: 2px solid rgb(255, 238, 0) !important
+}
+
+

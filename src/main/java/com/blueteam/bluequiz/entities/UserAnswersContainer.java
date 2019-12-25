@@ -14,5 +14,5 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserAnswersContainer {
     private String emailAddress;
-    private Map<String, Set<String>> questionAnswer;
+    private Map<String, Set<String>> questionIdToAnswerId;
 }

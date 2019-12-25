@@ -6,6 +6,7 @@ import com.blueteam.bluequiz.entities.Question;
 import com.blueteam.bluequiz.entities.Quiz;
 import com.blueteam.bluequiz.entities.UserAnswersContainer;
 import com.blueteam.bluequiz.persistence.QuizRepository;
+import com.blueteam.bluequiz.persistence.StatisticRepository;
 import com.jayway.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
@@ -15,15 +16,15 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.jayway.restassured.RestAssured.given;
 
 public class UserAnswersControllerTest extends ApplicationTests {
-    /*@Autowired
+    @Autowired
     QuizRepository quizRepository;
+    @Autowired
+    StatisticRepository statisticRepository;
 
 
     @BeforeEach
@@ -34,20 +35,28 @@ public class UserAnswersControllerTest extends ApplicationTests {
     @AfterEach
     void clearData() {
         quizRepository.deleteById("3");
+        statisticRepository.deleteByUserEmail("admin");
     }
 
     @Disabled
     @Test
     public void shouldGet100PercentWithAllCorrectAnswers() {
 
-        Map<String, String> question = new HashMap<>();
-        question.put("1", "2");
-        question.put("2", "5");
-        question.put("3", "8");
+        Set answer1 = new HashSet();
+        answer1.add("2");
+        Set answer2 = new HashSet();
+        answer2.add("5");
+        Set answer3 = new HashSet();
+        answer2.add("8");
+
+        Map<String, Set<String>> question = new HashMap<>();
+        question.put("1", answer1);
+        question.put("2", answer2);
+        question.put("3", answer3);
 
         UserAnswersContainer userAnswersContainer = UserAnswersContainer.builder()
-                .questionAnswer(question)
-                .emailAddress("test100@test.com")
+                .questionIdToAnswerId(question)
+                .emailAddress("admin")
                 .build();
 
         given()
@@ -60,22 +69,27 @@ public class UserAnswersControllerTest extends ApplicationTests {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .body("quizId", Matchers.equalTo("3"))
-                .body("userEmail", Matchers.equalTo("test100@test.com"))
                 .body("result", Matchers.equalTo(100.0f));
     }
 
-    @Disabled
     @Test
     public void shouldGet66PercentWith1CorrectAnswerOf3() {
 
-        Map<String, String> question = new HashMap<>();
-        question.put("1", "2");
-        question.put("2", "6");
-        question.put("3", "8");
+        Set answer1 = new HashSet();
+        answer1.add("2");
+        Set answer2 = new HashSet();
+        answer2.add("6");
+        Set answer3 = new HashSet();
+        answer2.add("8");
+
+        Map<String, Set<String>> question = new HashMap<>();
+        question.put("1", answer1);
+        question.put("2", answer2);
+        question.put("3", answer3);
 
         UserAnswersContainer userAnswersContainer = UserAnswersContainer.builder()
-                .questionAnswer(question)
-                .emailAddress("test66@test.com")
+                .questionIdToAnswerId(question)
+                .emailAddress("admin")
                 .build();
 
         given()
@@ -88,7 +102,6 @@ public class UserAnswersControllerTest extends ApplicationTests {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .body("quizId", Matchers.equalTo("3"))
-                .body("userEmail", Matchers.equalTo("test66@test.com"))
                 .body("result", Matchers.equalTo(66.0f));
     }
 
@@ -96,14 +109,21 @@ public class UserAnswersControllerTest extends ApplicationTests {
     @Test
     public void shouldGet0PercentWithoutCorrectAnswers() {
 
-        Map<String, String> question = new HashMap<>();
-        question.put("1", "1");
-        question.put("2", "6");
-        question.put("3", "9");
+        Set answer1 = new HashSet();
+        answer1.add("1");
+        Set answer2 = new HashSet();
+        answer2.add("6");
+        Set answer3 = new HashSet();
+        answer2.add("9");
+
+        Map<String, Set<String>> question = new HashMap<>();
+        question.put("1", answer1);
+        question.put("2", answer2);
+        question.put("3", answer3);
 
         UserAnswersContainer userAnswersContainer = UserAnswersContainer.builder()
-                .questionAnswer(question)
-                .emailAddress("test0@test.com")
+                .questionIdToAnswerId(question)
+                .emailAddress("admin")
                 .build();
 
         given()
@@ -116,7 +136,6 @@ public class UserAnswersControllerTest extends ApplicationTests {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .body("quizId", Matchers.equalTo("3"))
-                .body("userEmail", Matchers.equalTo("test0@test.com"))
                 .body("result", Matchers.equalTo(0.0f));
     }
 
@@ -183,5 +202,5 @@ public class UserAnswersControllerTest extends ApplicationTests {
                                                 .build()))
                                 .build()))
                 .build());
-    }*/
+    }
 }

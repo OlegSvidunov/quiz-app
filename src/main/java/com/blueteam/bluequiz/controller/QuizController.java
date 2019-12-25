@@ -1,12 +1,8 @@
 package com.blueteam.bluequiz.controller;
 
 import com.blueteam.bluequiz.entities.Quiz;
-import lombok.extern.log4j.Log4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.blueteam.bluequiz.service.QuizManagerService;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,7 +30,7 @@ public class QuizController {
     public Quiz getById(@PathVariable String id) {
         return quizManagerService
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping(value = LIST_ALL_QUIZZES_URL_TEMPLATE, produces = MediaType.APPLICATION_JSON_VALUE)

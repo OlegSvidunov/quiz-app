@@ -11,19 +11,19 @@ import java.util.Optional;
 @Service
 public class QuizManagerService {
 
-    private final QuizRepository repository;
+    private final QuizRepository quizRepository;
 
     @Autowired
     public QuizManagerService(QuizRepository quizManagerRepository) {
-        this.repository = quizManagerRepository;
+        this.quizRepository = quizManagerRepository;
     }
 
     public Optional<Quiz> findById(String id) {
-        return repository.findById(id);
+        return quizRepository.findById(id);
     }
 
     public List<Quiz> getListOfAllQuizzes() {
-        return repository.findAll();
+        return quizRepository.findAll();
     }
 
     public void insert(Quiz quiz) {
@@ -31,12 +31,12 @@ public class QuizManagerService {
                 .quizTitle(quiz.getQuizTitle())
                 .questions(quiz.getQuestions())
                 .build();
-        repository.insert(newQuiz);
+        quizRepository.insert(newQuiz);
     }
 
     public void update(String id, Quiz quiz) {
-        if (repository.existsById(id)) {
-            repository.save(Quiz.builder()
+        if (quizRepository.existsById(id)) {
+            quizRepository.save(Quiz.builder()
                     ._id(id)
                     .quizTitle(quiz.getQuizTitle())
                     .build());
@@ -44,6 +44,6 @@ public class QuizManagerService {
     }
 
     public void deleteById(String id) {
-        repository.deleteById(id);
+        quizRepository.deleteById(id);
     }
 }

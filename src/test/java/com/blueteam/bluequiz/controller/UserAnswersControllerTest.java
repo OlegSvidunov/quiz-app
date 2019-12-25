@@ -36,22 +36,19 @@ public class UserAnswersControllerTest extends ApplicationTests {
     @AfterEach
     void clearData() {
         quizRepository.deleteById("3");
-        statisticRepository.deleteByUserEmail("test100@test.com");
-        statisticRepository.deleteByUserEmail("test0@test.com");
-        statisticRepository.deleteByUserEmail("test66@test.com");
+        statisticRepository.deleteByUserEmail("admin");
     }
 
     @Test
     public void shouldGet100PercentWithAllCorrectAnswers() {
-
         Map<String, String> question = new HashMap<>();
         question.put("1", "2");
         question.put("2", "5");
         question.put("3", "8");
 
         UserAnswersContainer userAnswersContainer = UserAnswersContainer.builder()
-                .questionAnswer(question)
-                .emailAddress("test100@test.com")
+                .questionIdToAnswerId(question)
+                .emailAddress("admin")
                 .build();
 
         given()
@@ -64,7 +61,6 @@ public class UserAnswersControllerTest extends ApplicationTests {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .body("quizId", Matchers.equalTo("3"))
-                .body("userEmail", Matchers.equalTo("test100@test.com"))
                 .body("result", Matchers.equalTo(100.0f));
     }
 
@@ -77,8 +73,8 @@ public class UserAnswersControllerTest extends ApplicationTests {
         question.put("3", "8");
 
         UserAnswersContainer userAnswersContainer = UserAnswersContainer.builder()
-                .questionAnswer(question)
-                .emailAddress("test66@test.com")
+                .questionIdToAnswerId(question)
+                .emailAddress("admin")
                 .build();
 
         given()
@@ -91,7 +87,6 @@ public class UserAnswersControllerTest extends ApplicationTests {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .body("quizId", Matchers.equalTo("3"))
-                .body("userEmail", Matchers.equalTo("test66@test.com"))
                 .body("result", Matchers.equalTo(66.0f));
     }
 
@@ -104,8 +99,8 @@ public class UserAnswersControllerTest extends ApplicationTests {
         question.put("3", "9");
 
         UserAnswersContainer userAnswersContainer = UserAnswersContainer.builder()
-                .questionAnswer(question)
-                .emailAddress("test0@test.com")
+                .questionIdToAnswerId(question)
+                .emailAddress("admin")
                 .build();
 
         given()
@@ -118,7 +113,6 @@ public class UserAnswersControllerTest extends ApplicationTests {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .body("quizId", Matchers.equalTo("3"))
-                .body("userEmail", Matchers.equalTo("test0@test.com"))
                 .body("result", Matchers.equalTo(0.0f));
     }
 

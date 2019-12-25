@@ -23,16 +23,14 @@ import java.util.List;
 
 @Log4j
 @Service
-public class QuizUserService implements UserDetailsService {
-
-
-    final UserRepository repository;
-    final MongoTemplate mongoTemplate;
+public class UserService implements UserDetailsService {
+    private final UserRepository userRepository;
+    private final MongoTemplate mongoTemplate;
 
     @Autowired
-    public QuizUserService(UserRepository repository,
-                           MongoTemplate mongoTemplate) {
-        this.repository = repository;
+    public UserService(UserRepository userRepository,
+                       MongoTemplate mongoTemplate) {
+        this.userRepository = userRepository;
         this.mongoTemplate = mongoTemplate;
     }
 
@@ -46,12 +44,12 @@ public class QuizUserService implements UserDetailsService {
     }
 
     public List<User> findAll() {
-        return repository.findAll();
+        return userRepository.findAll();
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByUsername(username);
+    public UserDetails loadUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
@@ -63,7 +61,7 @@ public class QuizUserService implements UserDetailsService {
     }
 
     public void deleteUserById(String id) {
-        repository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     public String getCurrentUserName() {
@@ -76,11 +74,11 @@ public class QuizUserService implements UserDetailsService {
             throw new IllegalArgumentException("User can't have empty name or password!");
         }
         if (hasUserUniqueName(username)) {
-            repository.save(User.builder()
-                .username(username)
-                .password(new BCryptPasswordEncoder().encode(password))
-                .roles(role)
-                .build());
+            userRepository.save(User.builder()
+                    .username(username)
+                    .password(new BCryptPasswordEncoder().encode(password))
+                    .roles(role)
+                    .build());
         } else {
             throw new IllegalStateException(String.format("User with name %s already exists", username));
         }

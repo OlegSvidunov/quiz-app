@@ -1,6 +1,6 @@
 package com.blueteam.bluequiz.controller;
 
-import com.blueteam.bluequiz.service.QuizUserService;
+import com.blueteam.bluequiz.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,25 +13,25 @@ import static com.blueteam.bluequiz.controller.Api.*;
 @RequestMapping(BASE_URL_TEMPLATE)
 public class UserController {
 
-    final QuizUserService quizUserService;
+    final UserService userService;
 
-    public UserController(QuizUserService quizUserService) {
-        this.quizUserService = quizUserService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping(USER_URL_TEMPLATE)
     public String getCurrentUserName() {
-        return quizUserService.getCurrentUserName();
+        return userService.getCurrentUserName();
     }
 
     @DeleteMapping(USER_URL_TEMPLATE)
     public void deleteUsedById(String id) {
-        quizUserService.deleteUserById(id);
+        userService.deleteUserById(id);
     }
 
     @PostMapping(ADD_USER_URL_TEMPLATE)
     public ResponseEntity saveNewUser(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
-        quizUserService.saveNewUser(username, password, "USER");
+        userService.saveNewUser(username, password, "USER");
         response.addHeader("Location", "/login");
         return new ResponseEntity(HttpStatus.MOVED_PERMANENTLY);
     }

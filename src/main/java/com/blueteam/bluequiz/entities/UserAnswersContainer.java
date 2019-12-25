@@ -13,5 +13,5 @@ import java.util.Map;
 @AllArgsConstructor
 public class UserAnswersContainer {
     private String emailAddress;
-    private Map<String, String> questionAnswer;
+    private Map<String, String> questionIdToAnswerId;
 }

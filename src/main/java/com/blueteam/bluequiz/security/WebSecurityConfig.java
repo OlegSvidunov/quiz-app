@@ -1,6 +1,6 @@
 package com.blueteam.bluequiz.security;
 
-import com.blueteam.bluequiz.service.QuizUserService;
+import com.blueteam.bluequiz.service.UserService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,10 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    final QuizUserService quizUserService;
+    private final UserService userService;
 
-    public WebSecurityConfig(QuizUserService quizUserService) {
-        this.quizUserService = quizUserService;
+    public WebSecurityConfig(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         //NoOpPasswordEncoder.getInstance() используется тк я не смог победить "Encoded password does not look like BCrypt"
-        auth.userDetailsService(quizUserService)
+        auth.userDetailsService(userService)
                 .passwordEncoder(passwordEncoder);
     }
 }
